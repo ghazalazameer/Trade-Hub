@@ -5,14 +5,18 @@ export default function Links() {
   return (
     <div className={styles.footer__links}>
       {links.map((link, i) => (
-        <ul>
+        <ul key={i}>
+          {" "}
+          {/* Key for outer list */}
           {i === 0 ? (
             <img src="../../../logo.png" alt="" />
           ) : (
             <b>{link.heading}</b>
           )}
           {link.links.map((link) => (
-            <li>
+            <li key={link.name}>
+              {" "}
+              {/* Key for inner list item */}
               <Link href={link.link}>{link.name}</Link>
             </li>
           ))}
@@ -23,7 +27,7 @@ export default function Links() {
 }
 const links = [
   {
-    heading: "SHOPPAY",
+    heading: "SwiftCart",
     links: [
       {
         name: "About us",

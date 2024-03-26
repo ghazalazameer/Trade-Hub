@@ -10,7 +10,7 @@ export default function NewsLetter() {
           type="text"
           placeholder="Your Email Address"
         />
-        <button className={styles.btn__primary}>SUBSCRIBE</button>
+        <button className={styles.btn_primary}>SUBSCRIBE</button>
       </div>
     
       <p>
