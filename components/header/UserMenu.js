@@ -1,20 +1,20 @@
 import styles from "./styles.module.scss";
 import Link from "next/link";   
 
-export default function UserMenu({loggedIn}) {
+export default function UserMenu({session}) {
   return (
   <div className={styles.menu}>
     <h4>Welcome to TradeHub !</h4>
-   {loggedIn ? (
+   {session ? (
     <div className={styles.flex}>
         <img
-        src="https://img.freepik.com/free-vector/cute-muslim-praying-cartoon-character-chibi-cartoon-animation-design_40876-3674.jpg"
+        src={session.user.image}
         alt=""
         className={styles.menu__img}
         />
         <div className={styles.col}>
             <span>Welcome Back,</span>
-            <h3>TradeHub</h3>
+            <h3>{session.user.name}</h3>
             <span>Sign Out</span>
         </div>
     </div>
