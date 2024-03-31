@@ -27,7 +27,7 @@ export default function Links() {
 }
 const links = [
   {
-    heading: "SwiftCart",
+    heading: "TradeHub",
     links: [
       {
         name: "About us",
