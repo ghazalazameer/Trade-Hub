@@ -9,6 +9,7 @@ import { BiLeftArrowAlt } from "react-icons/bi";
 import { useState } from "react";
 import CircledIconBtn from "@/components/buttons/circledIconBtn";
 import { getProviders } from "next-auth/react";
+import { set } from "mongoose";
 
 const initialvalues = {
   login_email: "",
@@ -17,8 +18,11 @@ const initialvalues = {
   email: "",
   password: "",
   conf_password: "",
+  success: "",
+  error: "",
 };
 export default function Signin({providers}) {
+  const [loading, setLoading] = useState(false);
   console.log(providers);
   const [user, setUser] = useState(initialvalues);
     const {
@@ -28,6 +32,8 @@ export default function Signin({providers}) {
       email,
       password,
       conf_password,
+      success,
+      error,
     } = user;
     const handleChange = (e) => {
       const { name, value } = e.target;
@@ -58,6 +64,21 @@ export default function Signin({providers}) {
         .required("Confirm your password.")
         .oneOf([Yup.ref("password")], "Passwords must match."),
     });
+    const signUpHandler = async () => {
+      try{
+        setLoading(true);
+        const {data}=await axios.post("/api/auth/signup", {
+          name,
+          email,
+          password,
+        });
+        setUser({...user, error: "", success: data.message});
+        setLoading(false);
+      }catch(error){
+        setLoading(false);
+        setUser({...user, sucess: "", error: error.response.data.message});
+      }
+    }
   return (
     <>
       <Header />
@@ -140,6 +161,9 @@ export default function Signin({providers}) {
               conf_password,
             }}
             validationSchema={registerValidation}
+            onSubmit={()=>{
+              signUpHandler();
+            }}
             >
               {(form) => (
                 <Form>
@@ -175,6 +199,16 @@ export default function Signin({providers}) {
                 </Form>
               )}
             </Formik>
+            <div>
+              {
+                success && <span>{success}</span>
+              }
+            </div>
+            <div>
+              {
+                error && <span>{error}</span>
+              }
+            </div>
           </div>
         </div>
       </div>
