@@ -12,18 +12,20 @@ router.post(async (req, res) => {
   try {
     await db.connectDb();
     const { name, email, password } = req.body;
-    if(!name || !email || !password) {
+    if (!name || !email || !password) {
       return res.status(400).json({ message: "Please fill all the fields!" });
     }
-    if(!validateEmail(email)) {
+    if (!validateEmail(email)) {
       return res.status(400).json({ message: "Invalid email address!" });
     }
     const user = await User.findOne({ email });
-    if(user) {
+    if (user) {
       return res.status(400).json({ message: "User already exists!" });
     }
-    if(password.length < 6) {
-      return res.status(400).json({ message: "Password must be at least 6 characters!" });
+    if (password.length < 6) {
+      return res
+        .status(400)
+        .json({ message: "Password must be at least 6 characters!" });
     }
     const cryptedPassword = await bcrypt.hash(password, 12);
     const newUser = new User({
@@ -33,12 +35,21 @@ router.post(async (req, res) => {
     });
     const addedUser = await newUser.save();
     const activation_token = createActivationToken({
-        id: addedUser._id.toString(),
+      id: addedUser._id.toString(),
     });
     const url = `${process.env.BASE_URL}/activate/${activation_token}`;
-    sendEmail(email, url, "", "Activate your account!")
+    sendEmail(
+      email,
+      url,
+      "",
+      "Activate your account!",
+      activationEmailTemplate
+    );
     await db.disconnectDb();
-    res.json({ message: "User registered successfully! Please activate your email to start." })
+    res.json({
+      message:
+        "User registered successfully! Please activate your email to start.",
+    });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
