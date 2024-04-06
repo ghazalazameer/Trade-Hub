@@ -105,7 +105,7 @@
       }
     }
     .header {
-      grid-area: header;
+      grid-area: header;;
       height: 40px;
       display: flex;
       align-items: center;
@@ -211,6 +211,7 @@
         }
         h4 {
           margin-top: 10px;
+          font-size: 15px;
           text-transform: capitalize;
         }
         &_btns {
@@ -235,15 +236,15 @@
         }
       }
       &__links {
-        margin-top: 1rem;
+        margin-top: 4rem;
         display: flex;
         align-items: center;
         justify-content: center;
         gap: 1rem;
         flex-wrap: wrap;
         li {
-          width: 50px;
-          height: 50px;
+          width: 30px;
+          height: 30px;
           background: $grey-color;
           border-radius: 50%;
           display: grid;
