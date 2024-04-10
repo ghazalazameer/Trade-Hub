@@ -10,8 +10,11 @@ import { BsArrowRight } from "react-icons/bs";
 import { gamingSwiper, women_accessories, women_dresses, women_shoes, women_swiper, homeImprovSwiper } from "@/data/home";
 import { useMediaQuery } from "react-responsive";
 import ProductsSwiper from "@/components/productsSwiper";
+import db from "../utils/db";
+import Product from "../models/Product";
 
-export default function Home() {
+export default function Home({products}) {
+  console.log("products", products); //remove later..................
   const { data: session } = useSession();
   const isMedium = useMediaQuery({ query: "(max-width:850px)" });
   const isMobile = useMediaQuery({ query: "(max-width:550px)" });
@@ -56,4 +59,14 @@ export default function Home() {
       <Footer />
     </>
   );
+}
+export async function getServerSideProps() {
+  db.connectDb();
+  let products = await Product.find().sort({ createdAt: -1 }).lean();
+
+  return {
+    props: {
+      products: JSON.parse(JSON.stringify(products)),
+    },
+  };
 }
