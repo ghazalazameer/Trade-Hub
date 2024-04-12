@@ -7,20 +7,30 @@ import Main from "@/components/home/main";
 import FlashDeals from "@/components/home/flashDeals";
 import Category from "@/components/home/category";
 import { BsArrowRight } from "react-icons/bs";
-import { gamingSwiper, women_accessories, women_dresses, women_shoes, women_swiper, homeImprovSwiper } from "@/data/home";
+import {
+  homeImprovSwiper,
+  women_accessories,
+  women_dresses,
+  women_shoes,
+  women_swiper,
+  gamingSwiper,
+} from "@/data/home";
+import axios from "axios";
+import db from "@/utils/db";
+import Product from "@/models/Product";
+
 import { useMediaQuery } from "react-responsive";
 import ProductsSwiper from "@/components/productsSwiper";
-import db from "../utils/db";
-import Product from "../models/Product";
+import ProductCard from "@/components/productCard";
 
-export default function Home({products}) {
-  console.log("products", products); //remove later..................
+export default function Home({ country, products }) {
+  // console.log(products);
   const { data: session } = useSession();
   const isMedium = useMediaQuery({ query: "(max-width:850px)" });
   const isMobile = useMediaQuery({ query: "(max-width:550px)" });
   return (
     <>
-      <Header />
+      <Header country={country} />
       <div className={styles.home}>
         <div className={styles.container}>
           <Main />
@@ -51,15 +61,29 @@ export default function Home({products}) {
               background="#000"
             />
           </div>
-          <ProductsSwiper products={women_swiper} header="Dresses" bg="#5a31f4" />
-          <ProductsSwiper products={gamingSwiper} header="For Gamers" bg="#3c811f" />
-          <ProductsSwiper products={homeImprovSwiper} header="House Improvements" bg="#5a31f4" />
+          <ProductsSwiper products={women_swiper} />
+          <div className={styles.products}>
+            {products.map((product) => (
+              <ProductCard key={product._id} product={product} />
+            ))}
+          </div>
+          <ProductsSwiper
+            products={gamingSwiper}
+            header="For Gamers"
+            bg="#5a31f4"
+          />
+          <ProductsSwiper
+            products={homeImprovSwiper}
+            header="House Improvement"
+            bg=""
+          />
         </div>
       </div>
-      <Footer />
+      <Footer country={country} />
     </>
   );
 }
+
 export async function getServerSideProps() {
   db.connectDb();
   let products = await Product.find().sort({ createdAt: -1 }).lean();
