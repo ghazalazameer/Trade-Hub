@@ -1,12 +1,14 @@
 import styles from "./styles.module.scss";
 import React from 'react'
-import Rating from "@mui/material/Rating";
-import {useRouter} from 'next/router';
+import { Rating } from "@mui/material";
+import { useRouter } from 'next/router';
 import { useState, useEffect } from "react";
-import next from "next";
 import Link from "next/link";
-import '@mui/material/styles'
-import {TbMinus, TbPlus} from "react-icons/tb"; 
+import { TbMinus, TbPlus } from "react-icons/tb"; 
+import { BsHandbagFill, BsHeart } from "react-icons/bs";
+import Share from "../share";
+import Accordian from "./Accordian";
+// import SimillarSwiper from "./SimillarSwiper";
 
 export default function Infos({ product, setActiveImg }) {
   const router=useRouter();
@@ -28,7 +30,7 @@ useEffect(()=>{
         <h1 className={styles.infos__name}>{product.name}</h1>
         <h2 className={styles.infos__sku}>{product.name}</h2>
         <div className={styles.infos__rating}>
-        <Rating
+          <Rating
             name="half-rating-read"
             defaultValue={product.rating}
             precision={0.5}
@@ -36,7 +38,7 @@ useEffect(()=>{
             style={{ color: "#FACF19" }}
           />
           ({product.numReviews}
-          {product.numReviews == 1 ? "review" : " reviews"})
+          {product.numReviews == 1 ? " review" : " reviews"})
         </div>
         <div className={styles.infos__price}>
           {!size ? (
@@ -111,6 +113,23 @@ useEffect(()=>{
             <TbPlus />
           </button>
         </div>
+        <div className={styles.infos__actions}>
+          <button
+            disabled={product.quantity < 1}
+            style={{ cursor: `${product.quantity < 1 ? "not-allowed" : ""}` }}
+            onClick={() => addToCartHandler()}
+          >
+            <BsHandbagFill />
+            <b>ADD TO CART</b>
+          </button>
+          <button onClick={() => handleWishlist()}>
+            <BsHeart />
+            WISHLIST
+          </button>
+        </div>
+        <Share />
+        <Accordian details={[product.description, ...product.details]}/>
+        {/* <SimillarSwiper /> */}
       </div>
     </div>
   );
