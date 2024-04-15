@@ -5,10 +5,10 @@ import styles from "../../styles/product.module.scss";
 import db from "@/utils/db";
 import Head from "next/head";
 import Header from "@/components/header";
-import Footer from "@/components/footer";
 import MainSwiper from "@/components/productPage/mainSwiper";
 import { useState } from "react";
 import Infos from "@/components/productPage/infos"; 
+import Reviews from "@/components/productPage/reviews";
 
 export default function Products({product}) {
   const [activeImg, setActiveImg] = useState("");
@@ -32,10 +32,10 @@ export default function Products({product}) {
                 <MainSwiper images={product.images} activeImg={activeImg} />
                 <Infos product={product} setActiveImg={setActiveImg} />
             </div>
+            <Reviews product={product} />
         </div>
 
       </div>
-      <Footer />
     </div>
   )
 }
@@ -79,6 +79,31 @@ export default function Products({product}) {
             :subProduct.sizes[size].price,
             priceBefore: subProduct.sizes[size].price,
             quantity:subProduct.sizes[size].qty,
+            ratings: [
+              {
+                "percentage": "76",
+              },
+              {
+                "percentage": "14",
+              },
+              {
+                "percentage": "6",
+              },
+              {
+                "percentage": "4",
+              },
+              {
+                "percentage": "0",
+              },
+            ],
+            allSizes: product.subProducts.map((p)=>{
+              return p.sizes;
+            })
+            .flat()
+            .sort((a, b) => {
+              return a.size - b.size;
+            }).filter((element,index,array)=>array.findIndex((el2)=> el2.size===element.size)===index
+          ),
     };
     // ...........
     // console.log("newProduct",newProduct);
