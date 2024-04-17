@@ -20,7 +20,7 @@ export default function Reviews({product}) {
                         defaultValue={product.rating}
                         precision={0.5}
                         readOnly
-                        style={{color: "#FACF19"}}
+                        style={{color: "#FACF19", width: "150px"}}
                         />
                         {product.rating == 0 ? "No rating yet" : product.rating}
                     </div>
@@ -32,7 +32,7 @@ export default function Reviews({product}) {
                         name="half-rating-read"
                         defaultValue={5-i}
                         readOnly
-                        style={{color: "#FACF19"}}
+                        style={{color: "#FACF19", width: "100px"}}
                         />
                         <div className={styles.bar}>
                             <div className={styles.bar__inner}

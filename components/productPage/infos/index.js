@@ -35,7 +35,7 @@ useEffect(()=>{
             defaultValue={product.rating}
             precision={0.5}
             readOnly
-            style={{ color: "#FACF19" }}
+            style={{ color: "#FACF19", width: "150px"}}
           />
           ({product.numReviews}
           {product.numReviews == 1 ? " review" : " reviews"})

@@ -50,7 +50,7 @@ export default function AddReview({ product }) {
           value={rating}
           onChange={(e) => setRating(e.target.value)}
           precision={0.5}
-          style={{ color: "#facf19", fontSize: "3rem" }}
+          style={{ color: "#facf19", fontSize: "3rem", width: "150px" }}
         />
         <button className={styles.login_btn}>Submit Review
 
