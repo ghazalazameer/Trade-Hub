@@ -63,6 +63,7 @@ export default function Products({product}) {
 
   let newProduct = {
     ...product,
+    style,
     images: subProduct.images,
     sizes: subProduct.sizes,
     discount: subProduct.discount,

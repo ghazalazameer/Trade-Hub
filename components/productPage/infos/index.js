@@ -9,6 +9,8 @@ import { BsHandbagFill, BsHeart } from "react-icons/bs";
 import Share from "./share";
 import Accordian from "./Accordian";
 import SimillarSwiper from "./SimillarSwiper";
+import axios from "axios";
+import { addToCart, updateCart } from "../../../store/cartSlice";
 
 export default function Infos({ product, setActiveImg }) {
   const router=useRouter();
@@ -24,6 +26,12 @@ useEffect(()=>{
     setQty(product.quantity);
   }
 }, [router.query.size]);
+const addToCartHandler = async () => {
+  const { data } = await axios.get(
+    `/api/product/${product._id}?style=${product.style}&size=${router.query.size}`
+  );
+  // console.log("data -------->", data);
+};
   return (
     <div className={styles.infos}>
       <div className={styles.infos__container}>
