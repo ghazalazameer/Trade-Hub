@@ -1,5 +1,5 @@
 import styles from "./styles.module.scss";
-import React from 'react'
+import React, { use } from 'react'
 import { Rating } from "@mui/material";
 import { useRouter } from 'next/router';
 import { useState, useEffect } from "react";
@@ -11,11 +11,15 @@ import Accordian from "./Accordian";
 import SimillarSwiper from "./SimillarSwiper";
 import axios from "axios";
 import { addToCart, updateCart } from "../../../store/cartSlice";
+import { useDispatch, useSelector } from "react-redux";
 
 export default function Infos({ product, setActiveImg }) {
   const router=useRouter();
+  const dispatch=useDispatch();
   const [size,setSize]=useState(router.query.size);
   const [qty, setQty] = useState("1");
+  const [error, setError] = useState("");
+  const {cart}=useSelector((state)=>({...state}));
   useEffect(()=>{
     setSize("");
     setQty(1);
@@ -27,10 +31,44 @@ useEffect(()=>{
   }
 }, [router.query.size]);
 const addToCartHandler = async () => {
+  if(!router.query.size){
+    setError("Please select a size!");
+    return;
+  }
+
   const { data } = await axios.get(
     `/api/product/${product._id}?style=${product.style}&size=${router.query.size}`
   );
-  // console.log("data -------->", data);
+  if(qty>data.quantity){
+    setError("The Quantity you have Choosed is more than in stock! Try a lower QTy!");
+  }
+  else if(data.quantity<1){
+    setError("This Product is out of stock!");
+    return;
+  }
+  else{
+    let _uid=`${data._id}_${product.style}_${router.query.size}`;
+    let exist = cart.cartItems.find((p)=>p._uid===_uid);
+    if(exist){
+      let newCart = cart.cartItems.map((p)=>{
+        if(p._uid==exist._uid){
+          return {...p,qty:qty};
+        }
+        return p;
+      });
+      dispatch(updateCart(newCart));
+    }
+    else{
+      dispatch(addToCart(
+        {
+          ...data,
+          qty,
+          size: data.size,
+          _uid,
+        }
+      ))
+    }
+  }
 };
   return (
     <div className={styles.infos}>
@@ -135,6 +173,9 @@ const addToCartHandler = async () => {
             WISHLIST
           </button>
         </div>
+        {
+          error && <span className={styles.error}>{error}</span>
+        }
         <Share />
         <Accordian details={[product.description, ...product.details]}/>
         <SimillarSwiper />
