@@ -1,4 +1,4 @@
-import styles from "./style.module.scss";
+import styles from "./styles.module.scss";
 import { BsHeart } from "react-icons/bs";
 import { AiOutlineDelete } from "react-icons/ai";
 import { MdOutlineKeyboardArrowRight } from "react-icons/md";
