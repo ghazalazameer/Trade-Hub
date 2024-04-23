@@ -39,6 +39,7 @@ const addToCartHandler = async () => {
   const { data } = await axios.get(
     `/api/product/${product._id}?style=${product.style}&size=${router.query.size}`
   );
+  console.log(data);
   if(qty>data.quantity){
     setError("The Quantity you have Choosed is more than in stock! Try a lower QTy!");
   }
@@ -48,7 +49,8 @@ const addToCartHandler = async () => {
   }
   else{
     let _uid=`${data._id}_${product.style}_${router.query.size}`;
-    let exist = cart.cartItems.find((p)=>p._uid===_uid);
+    console.log(cart);
+    let exist = cart?.cartItems?.find((p)=>p._uid===_uid);
     if(exist){
       let newCart = cart.cartItems.map((p)=>{
         if(p._uid==exist._uid){

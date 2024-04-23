@@ -10,17 +10,16 @@ export const saveCart = async (cart) => {
     return response.data.error.message;
   }
 };
-// export const saveAddress = async (address, userId) => {
-//   try {
-//     const { data } = await axios.post("/api/user/saveAddress", {
-//       address,
-//       userId,
-//     });
-//     return data;
-//   } catch (error) {
-//     return error.response.data.message;
-//   }
-// };
+export const saveAddress = async (address) => {
+  try {
+    const { data } = await axios.post("/api/user/saveAddress", {
+      address,
+    });
+    return data;
+  } catch (error) {
+    return error.response.data.message;
+  }
+};
 // export const changeActiveAddress = async (id) => {
 //   try {
 //     const { data } = await axios.put("/api/user/manageAddress", {

@@ -6,6 +6,12 @@ import "yup-phone";
 import ShippingInput from "@/components/inputs/shippingInput";
 import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
 import { countries } from "@/data/countries";
+import SingularSelect from "@/components/selects/SingularSelect";
+import { saveAddress } from "@/requests/user";
+import { FaIdCard, FaMapMarkedAlt } from "react-icons/fa";
+import { GiPhone } from "react-icons/gi";
+import { IoMdArrowDropupCircle } from 'react-icons/io';
+import { AiOutlinePlus } from 'react-icons/ai';
 
 const initialValues = {
     firstName: "",
@@ -26,6 +32,7 @@ export default function Shipping({
     }) {
     const [addresses, setAddresses] = useState(user?.addresses || []);
     const [shipping, setShipping] = useState(initialValues);
+    const [visible, setVisible] = useState(user?.address.length ? false : true);
     const {
         firstName,
         lastName,
@@ -79,106 +86,138 @@ export default function Shipping({
       };
       const saveShippingHandler = async () => {
         const res = await saveAddress(shipping);
-        setAddresses(res.addresses);
-      };
-      const changeActiveHandler = async (id) => {
-        const res = await changeActiveAddress(id);
-        setAddresses(res.addresses);
-      };
-      const deleteHandler = async (id) => {
-        const res = await deleteAddress(id);
-        setAddresses(res.addresses);
+        setAddresses(...addresses, res);
+        setSelectedAddress(res);
       };
   return (
     <div className={styles.shipping}>
-        <Formik
-        enableReinitialize
-        initialValues={{
-        firstName,
-        lastName,
-        phoneNumber,
-        state,
-        city,
-        zipCode,
-        address1,
-        address2,
-        }}
-        validationSchema={validate}
-          onSubmit={() => {
-            saveShippingHandler();
-          }}
-        >
-            {
-                (formik)=>
-                <Form>
-                    <FormControl className={styles.select}>
-                        <InputLabel id="demo-simple-select-helper-label">
-                            Country
-                        </InputLabel>
-                       <Select 
-                       LabelId="demo-simple-select-helper-label"
-                       id="demo-simple-select-helper"
-                       value={country}
-                       name="country"
-                       onChange={handleChange}
-                       >
-                        {
-                            countries.map((country)=>(
-                                <MenuItem value={country.name} key={country.name}>
-                                    {country.name}
-                                </MenuItem>
-                            ))
-                        }
-                       </Select>
-                    </FormControl>
-                    <div className={styles.col}>
-                <ShippingInput
-                  name="firstName"
-                  placeholder="*First Name"
-                  onChange={handleChange}
-                />
-                <ShippingInput
-                  name="lastName"
-                  placeholder="*Last Name"
-                  onChange={handleChange}
-                />
+      <div className={styles.addresses}>
+        {
+          addresses.map((address)=>(
+            <div className={`${styles.address} ${address.active && styles.active}`}
+            key={address._id}
+            >
+              <div className={styles.address__side}>
+                <img src={user.image} alt="" />
               </div>
-              <div className={styles.col}>
-                <ShippingInput
-                  name="state"
-                  placeholder="*State/Province"
-                  onChange={handleChange}
-                />
-                <ShippingInput
-                  name="city"
-                  placeholder="*City"
-                  onChange={handleChange}
-                />
+              <div className={styles.address__col}>
+                <span>
+                  <FaIdCard />
+                  {address.firstName.toUpperCase()}{""}
+                  {address.lastName.toUpperCase()}
+                </span>
+                <span>
+                  <GiPhone />
+                  {address.phoneNumber}
+                </span>
               </div>
-              <ShippingInput
-                name="phoneNumber"
-                placeholder="*Phone number"
-                onChange={handleChange}
-              />
-              <ShippingInput
-                name="zipCode"
-                placeholder="*Post/Zip code"
-                onChange={handleChange}
-              />
-              <ShippingInput
-                name="address1"
-                placeholder="Address 1"
-                onChange={handleChange}
-              />
-              <ShippingInput
-                name="address2"
-                placeholder="Address 2"
-                onChange={handleChange}
-              />
-              <button type="submit">Save Address</button>
-                </Form>
-            }
-        </Formik>
+              <div className={styles.address__col}>
+                <span>
+                  <FaMapMarkedAlt />
+                  {address.address1}
+                </span>
+                <span>{address.address2}</span>
+                <span>
+                  {address.city}, {address.state}, {address.country}
+                </span>
+                <span>{address.zipCode}</span>
+              </div>
+              <span className={styles.active__text} 
+              style={{display: `${!address.active && "none"}`}}></span>
+            </div>
+          ))
+        }
+      </div>
+      <button className={styles.hide_show} onClick={() => setVisible(!visible)}>
+        {visible ? (
+          <span>
+            <IoMdArrowDropupCircle style={{ fontSize: "2rem", fill: "#222" }} />
+          </span>
+        ) : (
+          <span>
+            ADD NEW ADDRESS <AiOutlinePlus />
+          </span>
+        )}
+      </button>
+        {
+          visible && (
+            <Formik
+            enableReinitialize
+            initialValues={{
+              firstName,
+              lastName,
+              phoneNumber,
+              state,
+              city,
+              zipCode,
+              address1,
+              address2,
+              country,
+            }}
+            validationSchema={validate}
+            onSubmit={() => {
+              saveShippingHandler();
+            }}
+          >
+            {(formik) => (
+              <Form>
+                <SingularSelect
+                  name="country"
+                  value={country}
+                  placeholder="*Country"
+                  handleChange={handleChange}
+                  data={countries}
+                />
+                <div className={styles.col}>
+                  <ShippingInput
+                    name="firstName"
+                    placeholder="*First Name"
+                    onChange={handleChange}
+                  />
+                  <ShippingInput
+                    name="lastName"
+                    placeholder="*Last Name"
+                    onChange={handleChange}
+                  />
+                </div>
+                <div className={styles.col}>
+                  <ShippingInput
+                    name="state"
+                    placeholder="*State/Province"
+                    onChange={handleChange}
+                  />
+                  <ShippingInput
+                    name="city"
+                    placeholder="*City"
+                    onChange={handleChange}
+                  />
+                </div>
+                <ShippingInput
+                  name="phoneNumber"
+                  placeholder="*Phone number"
+                  onChange={handleChange}
+                />
+                <ShippingInput
+                  name="zipCode"
+                  placeholder="*Post/Zip code"
+                  onChange={handleChange}
+                />
+                <ShippingInput
+                  name="address1"
+                  placeholder="Address 1"
+                  onChange={handleChange}
+                />
+                <ShippingInput
+                  name="address2"
+                  placeholder="Address 2"
+                  onChange={handleChange}
+                />
+                <button type="submit">Save Address</button>
+              </Form>
+            )}
+          </Formik>
+          )
+        }
       
     </div>
   )
