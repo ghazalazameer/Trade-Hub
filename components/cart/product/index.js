@@ -2,18 +2,24 @@ import styles from "./styles.module.scss";
 import { BsHeart } from "react-icons/bs";
 import { AiOutlineDelete } from "react-icons/ai";
 import { MdOutlineKeyboardArrowRight } from "react-icons/md";
+
 import { useDispatch, useSelector } from "react-redux";
 import { updateCart } from "../../../store/cartSlice";
 import { useState, useEffect } from "react";
 
-export default function Product({ product, selected, setSelected}) {
+export default function Product({ product, selected, setSelected }) {
   const { cart } = useSelector((state) => ({ ...state }));
   const [active, setActive] = useState();
+  // console.log(active);
+
   useEffect(() => {
     const check = selected.find((p) => p._uid == product._uid);
     setActive(check);
   }, [selected]);
+
   const dispatch = useDispatch();
+
+  // Update product quantity
   const updateQty = (type) => {
     let newCart = cart.cartItems.map((p) => {
       if (p._uid == product._uid) {
@@ -49,8 +55,10 @@ export default function Product({ product, selected, setSelected}) {
         Official Store of TradeHub
       </div>
       <div className={styles.product__image}>
-        <div className={`${styles.checkbox} ${active? styles.active:""}`} 
-        onClick={()=>handleSelect()}></div>
+        <div
+          className={`${styles.checkbox} ${active ? styles.active : ""}`}
+          onClick={() => handleSelect()}
+        ></div>
         <img src={product.images[0].url} alt="" />
         <div className={styles.col}>
           <div className={styles.grid}>
@@ -62,8 +70,9 @@ export default function Product({ product, selected, setSelected}) {
             <div style={{ zIndex: "2" }}>
               <BsHeart />
             </div>
-            <div style={{ zIndex: "2" }}
-            onClick={()=>removeProduct(product._uid)}
+            <div
+              style={{ zIndex: "2" }}
+              onClick={() => removeProduct(product._uid)}
             >
               <AiOutlineDelete />
             </div>
@@ -71,13 +80,13 @@ export default function Product({ product, selected, setSelected}) {
           <div className={styles.product__style}>
             <img src={product.color.image} alt="" />
             {product.size && <span>{product.size}</span>}
-            {product.price && <span>{product.price.toFixed(2)}$</span>}
+            {product.price && <span>{product.price.toFixed(2)}Rs.</span>}
             <MdOutlineKeyboardArrowRight />
           </div>
           <div className={styles.product__priceQty}>
             <div className={styles.product__priceQty_price}>
               <span className={styles.price}>
-                USD{(product.price * product.qty).toFixed(2)}$
+                Rs. {(product.price * product.qty).toFixed(2)}$
               </span>
               {product.price !== product.priceBefore && (
                 <span className={styles.priceBefore}>
@@ -111,7 +120,7 @@ export default function Product({ product, selected, setSelected}) {
           </div>
           {product.quantity < 1 && (
             <div className={styles.notAvailable}>
-              This product is out of stock! Add it to your wishlist it may get
+              This product is out of stock, Add it to your whishlist it may get
               restocked.
             </div>
           )}
