@@ -91,6 +91,7 @@ export default function Shipping({ user, addresses, setAddresses }) {
     country: Yup.string().required("Country name is required."),
   });
   // ----------------------------------------
+  
   // --- Handle change -----------------------
   const handleChange = (e) => {
     const { name, value } = e.target;
