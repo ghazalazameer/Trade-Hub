@@ -214,6 +214,7 @@ export default function Shipping({ user, addresses, setAddresses }) {
                 handleChange={handleChange}
                 data={countries}
               />
+               <div className={styles.emptySpace}></div>
               <div className={styles.col}>
                 <ShippingInput
                   name="firstName"
