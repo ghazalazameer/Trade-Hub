@@ -26,8 +26,8 @@
   }
 }
 .hide_show {
-  margin-top: -15px;
-  margin-bottom: -1rem; 
+  margin-top: -15px; //extra addition
+  margin-bottom: -1rem; //extra addition
   height: 45px;
   width: 100%;
   background: transparent;
@@ -122,6 +122,6 @@
     background-image: url("../../../public/images/address.png");
   }
 }
-.emptySpace {
+.emptySpace { //extra addition
   height: 18px;
 }
