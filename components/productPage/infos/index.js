@@ -12,6 +12,7 @@ import Accordian from "./Accordian";
 import SimillarSwiper from "./SimillarSwiper";
 import { Rating } from "@mui/material";
 import { addToCart, updateCart } from "../../../store/cartSlice";
+import { toast } from "react-toastify";
 
 export default function Infos({ product, setActiveImg }) {
   const router = useRouter();
@@ -36,49 +37,62 @@ export default function Infos({ product, setActiveImg }) {
     }
   }, [router.query.size, product.quantity, qty]);
 
-  const addToCartHandler = async (e, id, style, size, cart, dispatch) => {
-    e.preventDefault();
-    e.stopPropagation();
-    if (!router.query.size) {
-      setError("Please select a size!");
-      return;
-    }
-
-    const { data } = await axios.get(
-      `/api/product/${product._id}?style=${product.style}&size=${router.query.size}`
-    );
-    // console.log(data);
-    if (qty > data.quantity) {
-      setError(
-        "The Quantity you have Choosed is more than in stock! Try a lower QTy!"
-      );
-    } else if (data.quantity < 1) {
-      setError("This Product is out of stock!");
-      return;
-    } else {
-      let _uid = `${data._id}_${product.style}_${router.query.size}`;
-      let exist = cart.cartItems.find((p) => p._uid === _uid);
-      console.log(exist);
-      if (exist) {
-        let newCart = cart.cartItems.map((p) => {
-          if (p._uid == exist._uid) {
-            return { ...p, qty: qty };
-          }
-          return p;
-        });
-        dispatch(updateCart(newCart));
-      } else {
-        dispatch(
-          addToCart({
-            ...data,
-            qty: 1,
-            size: data.size,
-            _uid,
-          })
-        );
+  // ...............................................................................................
+  const addToCartHandler = async () => {
+    try {
+      if (!router.query.size) {
+        setError("Please select a size!");
+        return;
       }
+  
+      const { data } = await axios.get(
+        `/api/product/${product._id}?style=${product.style}&size=${router.query.size}`
+      );
+  
+      if (!data || !data.quantity) {
+        setError("Failed to fetch product information.");
+        return;
+      }
+  
+      toast.success(data.message);
+      console.log(data);
+  
+      // Move subsequent logic inside the try block
+      if (qty > data.quantity) {
+        setError(
+          "The Quantity you have Choosed is more than in stock! Try a lower QTy!"
+        );
+      } else if (data.quantity < 1) {
+        setError("This Product is out of stock!");
+        return;
+      } else {
+        let _uid = `${data._id}_${product.style}_${router.query.size}`;
+        let exist = cart.cartItems.find((p) => p._uid === _uid);
+        console.log(exist);
+        if (exist) {
+          let newCart = cart.cartItems.map((p) => {
+            if (p._uid == exist._uid) {
+              return { ...p, qty: qty };
+            }
+            return p;
+          });
+          dispatch(updateCart(newCart));
+        } else {
+          dispatch(
+            addToCart({
+              ...data,
+              qty: 1,
+              size: data.size,
+              _uid,
+            })
+          );
+        }
+      }
+    } catch (error) {
+      toast.error(error.response?.data?.message || "An error occurred.");
     }
   };
+  // ....................................................................................................
 
   return (
     <div className={styles.infos__container}>
