@@ -1,6 +1,6 @@
 import * as React from "react";
 import styles from "./styles.module.scss";
-import { use, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
