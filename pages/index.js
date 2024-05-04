@@ -15,10 +15,8 @@ import {
   women_swiper,
   gamingSwiper,
 } from "@/data/home";
-import axios from "axios";
 import db from "@/utils/db";
 import Product from "@/models/Product";
-
 import { useMediaQuery } from "react-responsive";
 import ProductsSwiper from "@/components/productsSwiper";
 import ProductCard from "@/components/productCard";
@@ -28,6 +26,7 @@ export default function Home({ country, products }) {
   const { data: session } = useSession();
   const isMedium = useMediaQuery({ query: "(max-width:850px)" });
   const isMobile = useMediaQuery({ query: "(max-width:550px)" });
+
   return (
     <>
       <Header country={country} />
@@ -87,21 +86,12 @@ export default function Home({ country, products }) {
 export async function getServerSideProps() {
   db.connectDb();
   let products = await Product.find().sort({ createdAt: -1 }).lean();
-  let data = await axios
-    .get(`https://api.ipregistry.co/?key=${process.env.IP_REGISTRY_API_KEY}`)
-    .then((res) => {
-      return res.data.location.country;
-    })
-    .catch((err) => {
-      console.log(err);
-    });
 
   return {
     props: {
       products: JSON.parse(JSON.stringify(products)),
       country: {
         name: "India",
-        flag: "https://cdn.ipregistry.co/flags/emojitwo/in.svg",
       },
     },
   };
