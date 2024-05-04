@@ -87,10 +87,22 @@ export default function Home({ country, products }) {
 export async function getServerSideProps() {
   db.connectDb();
   let products = await Product.find().sort({ createdAt: -1 }).lean();
+  let data = await axios
+    .get(`https://api.ipregistry.co/?key=${process.env.IP_REGISTRY_API_KEY}`)
+    .then((res) => {
+      return res.data.location.country;
+    })
+    .catch((err) => {
+      console.log(err);
+    });
 
   return {
     props: {
       products: JSON.parse(JSON.stringify(products)),
+      country: {
+        name: "India",
+        flag: "https://cdn.ipregistry.co/flags/emojitwo/in.svg",
+      },
     },
   };
 }

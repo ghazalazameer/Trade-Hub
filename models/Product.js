@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 const { ObjectId } = mongoose.Schema;
+
 const reviewSchema = new mongoose.Schema({
   reviewBy: {
     type: ObjectId,
@@ -28,6 +29,7 @@ const reviewSchema = new mongoose.Schema({
   images: [],
   likes: [],
 });
+
 const productSchema = new mongoose.Schema(
   {
     name: {
@@ -45,6 +47,7 @@ const productSchema = new mongoose.Schema(
       type: String,
       required: true,
       unique: true,
+      //lowercase: true,
     },
     category: {
       type: ObjectId,
@@ -124,6 +127,7 @@ const productSchema = new mongoose.Schema(
     timestamps: true,
   }
 );
-const Product = mongoose.models.Product || mongoose.model("Product", productSchema);
+const Product =
+  mongoose.models.Product || mongoose.model("Product", productSchema);
 
 export default Product;
