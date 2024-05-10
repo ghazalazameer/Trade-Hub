@@ -78,44 +78,47 @@ export default function Create({ parents, categories }) {
 
   // useEffect to fetch the parent data..............................................
   useEffect(() => {
-    const getParentData = async () => {
-      const { data } = await axios.get(`/api/product/${product.parent}`);
-      console.log(data);
-      if (data) {
-        setProduct({
-          ...product,
-          name: data.name,
-          description: data.description,
-          brand: data.brand,
-          category: data.category,
-          subCategories: data.subCategories,
-          questions: [],
-          details: [],
-        });
-      }
-    };
-    getParentData();
+    axios
+      .get(`/api/admin/product/${product.parent}`)
+      .then(({ data }) => {
+        if (data) {
+          setProduct({
+            ...product,
+            name: data.name,
+            description: data.description,
+            brand: data.brand,
+            category: data.category,
+            subCategories: data.subCategories,
+            questions: [],
+            details: [],
+          });
+
+          toast.success(
+            "Chose parent. No need to choose Category & Sub-Categories any more."
+          );
+        }
+      })
+      .catch((e) => console.log(e));
   }, [product.parent]);
 
-  // second useEffect to get the subProducts.......................................
+  // Fetching all subcategories of a category........................................
   useEffect(() => {
-    async function getSubs() {
-      const { data } = await axios.get("/api/admin/subCategory", {
-        params: {
-          category: product.category,
-        },
+    axios
+      .get(`/api/admin/subcategory?category=${product.category}`)
+      .then(({ data }) => {
+        setSubs(data);
+      })
+      .catch((error) => {
+        console.log(error);
       });
-      console.log(data);
-      setSubs(data);
-    }
-    getSubs();
   }, [product.category]);
+
   // ----------------Handle Change----------------
   const handleChange = (e) => {
     const { value, name } = e.target;
     setProduct({ ...product, [name]: value });
   };
-  // --------------------------------------------
+ 
   // ---------Validation Schema----------------
   const validate = Yup.object({
     name: Yup.string()
@@ -134,6 +137,7 @@ export default function Create({ parents, categories }) {
     color: Yup.string().required("Please add a color"),
     description: Yup.string().required("Please add a description"),
   });
+
   // ---------Create Product----------------
   const createProduct = async () => {
     let test = validateCreateProduct(product, images);
@@ -189,8 +193,8 @@ export default function Create({ parents, categories }) {
       toast.error(error.response.data.message);
     }
   };
-
   //------------------------------------------
+
   return (
     <Layout>
       <div className={styles.header}>Create Product</div>
