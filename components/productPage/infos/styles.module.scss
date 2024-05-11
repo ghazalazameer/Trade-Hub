@@ -135,10 +135,12 @@
       width: 200px;
       font-weight: 500;
       font-family: "Poppins", sans-serif;
+      cursor: pointer;
       border-radius: 5px;
       box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); 
     
       &:first-of-type {
+        cursor: pointer;
         background: linear-gradient(to right, rgb(255, 131, 97), rgb(255, 77, 166));
         color: #ffffff;
         svg {
@@ -160,7 +162,12 @@
           width: 220px;
         }
         &:hover {
-          background: rgb(221, 221, 221); 
+          background-image: linear-gradient(
+            to top,
+            #f3e7e9 0%,
+            #d6e5fd 99%,
+            #d4e4fc 100%
+          );
         }
       }
     

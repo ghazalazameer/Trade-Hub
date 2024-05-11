@@ -9,6 +9,7 @@ import axios from "axios";
 import * as Yup from "yup";
 import { useEffect } from "react";
 import { Form, Formik } from "formik";
+import { toast } from "react-toastify";
 import SingularSelect from "@/components/selects/SingularSelect";
 import MultipleSelect from "@/components/selects/MultipleSelect";
 import AdminInput from "@/components/inputs/adminInput";
@@ -101,10 +102,10 @@ export default function Create({ parents, categories }) {
       .catch((e) => console.log(e));
   }, [product.parent]);
 
-  // Fetching all subcategories of a category........................................
+  // second useEffect to get the subProducts.......................................
   useEffect(() => {
     axios
-      .get(`/api/admin/subcategory?category=${product.category}`)
+      .get(`/api/admin/subCategory?category=${product.category}`)
       .then(({ data }) => {
         setSubs(data);
       })
@@ -112,13 +113,12 @@ export default function Create({ parents, categories }) {
         console.log(error);
       });
   }, [product.category]);
-
   // ----------------Handle Change----------------
   const handleChange = (e) => {
     const { value, name } = e.target;
     setProduct({ ...product, [name]: value });
   };
- 
+  // --------------------------------------------
   // ---------Validation Schema----------------
   const validate = Yup.object({
     name: Yup.string()
@@ -137,7 +137,6 @@ export default function Create({ parents, categories }) {
     color: Yup.string().required("Please add a color"),
     description: Yup.string().required("Please add a description"),
   });
-
   // ---------Create Product----------------
   const createProduct = async () => {
     let test = validateCreateProduct(product, images);
@@ -193,8 +192,8 @@ export default function Create({ parents, categories }) {
       toast.error(error.response.data.message);
     }
   };
-  //------------------------------------------
 
+  //------------------------------------------
   return (
     <Layout>
       <div className={styles.header}>Create Product</div>
@@ -361,7 +360,7 @@ export default function Create({ parents, categories }) {
   );
 }
 export async function getServerSideProps(ctx) {
-  db.connectDb();
+  await db.connectDb();
   const results = await Product.find().select("name subProducts").lean();
   const categories = await Category.find().lean();
   db.disconnectDb();
