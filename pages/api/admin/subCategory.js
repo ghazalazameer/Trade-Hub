@@ -7,7 +7,7 @@ import db from "../../../utils/db";
 import slugify from "slugify";
 
 // Category Model............................................................
-const router = createRouter().use(auth).use(admin);
+const router = createRouter().use(auth).use(admin); 
 router.post(async (req, res) => {
   try {
     const { name, parent } = req.body;
