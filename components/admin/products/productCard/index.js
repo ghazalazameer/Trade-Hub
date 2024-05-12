@@ -11,8 +11,7 @@ export default function ProductCard({ product }) {
   return (
     <div className={styles.product}>
       <h1 className={styles.product__name}>{product.name}</h1>
-       {/* ? condition just to check if product.category is empty still it not give error */}
-      <h2 className={styles.product__category}>#{product.category?.name}</h2> 
+      <h2 className={styles.product__category}>#{product.category?.name}</h2>
       <Swiper
         slidesPerView={1}
         spaceBetween={10}

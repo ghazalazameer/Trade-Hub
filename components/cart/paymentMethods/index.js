@@ -12,7 +12,7 @@ export default function PaymentMethods() {
       <h2 className={styles.header}>Buyer Protection</h2>
       <div className={styles.protection}>
         <img src="../../../images/protection.png" alt="" />
-        Get full refund if the item is not as described or if it is not
+        Get full refund if the item is not as described or if its not
         delievered.
       </div>
     </div>

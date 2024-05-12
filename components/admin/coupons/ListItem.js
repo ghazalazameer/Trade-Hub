@@ -1,14 +1,15 @@
 import axios from "axios";
 import { useRef } from "react";
 import { useState } from "react";
-import { AiFillDelete, AiTwotoneEdit } from "react-icons/ai";
 import { toast } from "react-toastify";
 import { TextField } from "@material-ui/core";
 import { DesktopDatePicker, LocalizationProvider } from "@mui/x-date-pickers";
+import { AiFillDelete, AiTwotoneEdit } from "react-icons/ai";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFnsV3";
 import styles from "./styles.module.scss";
 
 export default function ListItem({ coupon, setCoupons }) {
+  // ------------------- Update Coupon -------------------
   const [open, setOpen] = useState(false);
   const [name, setName] = useState("");
   const [discount, setDiscount] = useState("");
@@ -24,6 +25,7 @@ export default function ListItem({ coupon, setCoupons }) {
     setEndDate(newValue);
   };
   const input = useRef(null);
+  // ------------------- Remove Coupon -------------------
   const handleRemove = async (id) => {
     try {
       const { data } = await axios.delete("/api/admin/coupon", {
@@ -35,6 +37,7 @@ export default function ListItem({ coupon, setCoupons }) {
       toast.error(error.response.data.message);
     }
   };
+  // ------------------- Update Coupon -------------------
   const handleUpdate = async (id) => {
     try {
       const { data } = await axios.put("/api/admin/coupon", {
@@ -51,6 +54,7 @@ export default function ListItem({ coupon, setCoupons }) {
       toast.error(error.response.data.message);
     }
   };
+  // ------------------- JSX -------------------
   return (
     <li className={styles.list__item}>
       <input

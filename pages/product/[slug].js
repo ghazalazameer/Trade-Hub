@@ -28,8 +28,7 @@ export default function Products({ product }) {
       <div className={styles.product}>
         <div className={styles.product__container}>
           <div className={styles.path}>
-            {/* ? condition just to check if product.category is empty still it not give error */}
-            Home/ {product.category?.name}/ 
+            Home/ {product.category?.name}/
             {product.subCategories.map((sub, index) => (
               <span key={index}>/{sub.name}</span>
             ))}

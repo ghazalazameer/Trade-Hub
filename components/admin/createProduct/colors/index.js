@@ -5,32 +5,32 @@ import { ColorExtractor } from "react-color-extractor";
 import { TbArrowUpRightCircle } from "react-icons/tb";
 
 export default function Colors({
-    product,
-    setProduct,
-    name,
-    colorImage,
-    ...props
+  product,
+  setProduct,
+  name,
+  colorImage,
+  ...props
 }) {
-    const [toggle, setToggle] = useState(false);
-    const [colors, setColors] = useState([]);
-    const [field, meta] = useField(props);
-    const renderSwatches = () => {
-        return colors.map((color, id) => (
-            <div
-              className={styles.square__color}
-              key={id}
-              style={{ backgroundColor: color }}
-              onClick={() => {
-                setProduct({
-                  ...product,
-                  color: { color, image: product.color.image },
-                });
-              }}
-            >
-              {color}
-            </div>
-          ));
-        };
+  const [toggle, setToggle] = useState(false);
+  const [colors, setColors] = useState([]);
+  const [field, meta] = useField(props);
+  const renderSwatches = () => {
+    return colors.map((color, id) => (
+      <div
+        className={styles.square__color}
+        key={id}
+        style={{ backgroundColor: color }}
+        onClick={() => {
+          setProduct({
+            ...product,
+            color: { color, image: product.color.image },
+          });
+        }}
+      >
+        {color}
+      </div>
+    ));
+  };
 
   return (
     <div className={styles.colors}>

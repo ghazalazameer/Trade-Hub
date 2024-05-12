@@ -6,7 +6,7 @@ import auth from "../../../middleware/auth";
 
 const router = createRouter().use(auth);
 
-// ------------------------Create Order------------------------
+//Create Order.....................................................................
 router.post(async (req, res) => {
   try {
     db.connectDb();
@@ -38,5 +38,4 @@ router.post(async (req, res) => {
   }
 });
 
-// ------------------------export-----------------------------
 export default router.handler;

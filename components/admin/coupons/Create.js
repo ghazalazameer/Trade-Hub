@@ -2,16 +2,15 @@ import { Form, Formik } from "formik";
 import { useState } from "react";
 import axios from "axios";
 import * as Yup from "yup";
-import { toast } from "react-toastify";
-
-import AdminInput from "@/components/inputs/adminInput";
 import styles from "./styles.module.scss";
-
+import AdminInput from "../../inputs/adminInput";
+import { toast } from "react-toastify";
 import { TextField } from "@material-ui/core";
 import { DesktopDatePicker, LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFnsV3";
 
 export default function Create({ setCoupons }) {
+  // ------------------- Create Coupon -------------------
   const [name, setName] = useState("");
   const [discount, setDiscount] = useState(0);
   const tomorrow = new Date();
@@ -25,6 +24,7 @@ export default function Create({ setCoupons }) {
   const handleEndDate = (newValue) => {
     setEndDate(newValue);
   };
+  // ------------------- Validation Schema -------------------
   const validate = Yup.object({
     name: Yup.string()
       .required("Coupon name is required.")
@@ -35,7 +35,7 @@ export default function Create({ setCoupons }) {
       .min(1, "Discount must be atleast 1%")
       .max(99, "Discount must be 99% or less"),
   });
-
+  // ------------------- Submit Handler -------------------
   const submitHandler = async () => {
     try {
       if (startDate.toString() == endDate.toString()) {
@@ -59,6 +59,7 @@ export default function Create({ setCoupons }) {
       toast.error(error.response.data.message);
     }
   };
+  // ------------------- Formik -------------------
   return (
     <>
       <Formik

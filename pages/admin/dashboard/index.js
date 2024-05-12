@@ -8,9 +8,12 @@ export default function dashboard() {
       <Layout>
         <button
           onClick={() =>
-            toast.success("This is a success message", {
-              transition: Bounce,
-            })
+            toast.error(
+              "This is a success message!",
+              {
+                transition: Bounce,
+              }
+            )
           }
         >
           Show Toast

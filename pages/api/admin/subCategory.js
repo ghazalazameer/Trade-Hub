@@ -1,14 +1,13 @@
 import { createRouter } from "next-connect";
-import auth from "../../../middleware/auth";
-import Category from "../../../models/Category";
+import auth from "@/middleware/auth";
+import admin from "@/middleware/admin";
+import Category from "@/models/Category";
 import SubCategory from "../../../models/SubCategory";
 import db from "../../../utils/db";
 import slugify from "slugify";
-import admin from "@/middleware/admin";
 
-// ------------------- Category Model -------------------
+// Category Model............................................................
 const router = createRouter().use(auth).use(admin);
-// ------------------- Category Model -------------------
 router.post(async (req, res) => {
   try {
     const { name, parent } = req.body;
@@ -31,7 +30,7 @@ router.post(async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 });
-// ------------------- Delete Category -------------------
+// Delete Category...........................................................
 router.delete(async (req, res) => {
   try {
     const { id } = req.body;
@@ -46,7 +45,7 @@ router.delete(async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 });
-// ------------------- Update Category -------------------
+// Update Category...............................................................
 router.put(async (req, res) => {
   try {
     const { id, name, parent } = req.body;
@@ -65,7 +64,7 @@ router.put(async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 });
-// ---------------------------------------------------------------------
+//Get SubCategories..............................................................
 router.get(async (req, res) => {
   try {
     const { category } = req.query;
@@ -82,5 +81,5 @@ router.get(async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 });
-// ------------------- Export Handler -------------------
+
 export default router.handler();
