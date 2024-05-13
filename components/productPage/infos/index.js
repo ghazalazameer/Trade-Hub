@@ -88,7 +88,7 @@ export default function Infos({ product, setActiveImg }) {
       });
       dispatch(
         showDialog({
-          header: "Product Added to Whishlist Successfully",
+          header: "Product Added to Wishlist Successfully",
           msgs: [
             {
               msg: data.message,
