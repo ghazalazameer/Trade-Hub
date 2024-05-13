@@ -5,6 +5,7 @@ import AddReview from "./AddReview";
 import Select from "./Select";
 import styles from "./styles.module.scss";
 import Table from "./Table";
+
 export default function Reviews({ product }) {
   const { data: session } = useSession();
   const [rating, setRating] = useState("");
@@ -15,14 +16,14 @@ export default function Reviews({ product }) {
         <h1>Customer Reviews ({product.reviews.length})</h1>
         <div className={styles.reviews__stats}>
           <div className={styles.reviews__stats_overview}>
-            <span>Average Rating</span>
+            <span><b>Average Rating</b></span>
             <div className={styles.reviews__stats_overview_rating}>
               <Rating
                 name="half-rating-read"
                 defaultValue={product.rating}
                 precision={0.5}
                 readOnly
-                style={{ color: "#FACF19" }}
+                style={{ color: "#FACF19" , width: "150px"}}
               />
               {product.rating == 0 ? "No review yet." : product.rating}
             </div>
@@ -34,7 +35,7 @@ export default function Reviews({ product }) {
                   name="half-rating-read"
                   defaultValue={5 - i}
                   readOnly
-                  style={{ color: "#FACF19" }}
+                  style={{ color: "#FACF19" , width: "120px", marginLeft: "120px"}}
                 />
                 <div className={styles.bar}>
                   <div

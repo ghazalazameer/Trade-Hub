@@ -11,6 +11,8 @@ import { uploadImages } from "../../../requests/upload";
 import axios from "axios";
 import { ClipLoader } from "react-spinners";
 import { FaLastfmSquare } from "react-icons/fa";
+
+
 export default function AddReview({ product, setReviews }) {
   const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
@@ -135,7 +137,7 @@ export default function AddReview({ product, setReviews }) {
           value={rating}
           onChange={(e) => setRating(e.target.value)}
           precision={0.5}
-          style={{ color: "#facf19", fontSize: "3rem" }}
+          style={{ color: "#facf19", fontSize: "3rem", width: "150px"}}
         />
         <button
           className={`${styles.login_btn} ${loading ? styles.disabled : ""}`}

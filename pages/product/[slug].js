@@ -81,15 +81,15 @@ export async function getServerSideProps(context) {
           prices[prices.length - 1] / subProduct.discount
         ).toFixed(2)}$`
       : `From ${prices[0]} to ${prices[prices.length - 1]}$`,
-    price:
+      price:
       subProduct.discount > 0
         ? (
             subProduct.sizes[size].price -
             subProduct.sizes[size].price / subProduct.discount
           ).toFixed(2)
         : subProduct.sizes[size].price,
-    priceBefore: subProduct.sizes[size].price,
-    quantity: subProduct.sizes[size].qty,
+        priceBefore: subProduct.sizes[size].price,
+        quantity: subProduct.sizes[size].qty,
     ratings: [
       {
         percentage: "76",
@@ -107,6 +107,7 @@ export async function getServerSideProps(context) {
         percentage: "0",
       },
     ],
+    reviews: product.reviews.reverse(),
     allSizes: product.subProducts
       .map((p) => {
         return p.sizes;
