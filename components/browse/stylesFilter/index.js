@@ -4,7 +4,7 @@ import { FaMinus } from "react-icons/fa";
 import styles from "../styles.module.scss";
 import { useRouter } from "next/router";
 
-export default function StyleFilter({ data, styleHandler, replaceQuery }) {
+export default function StylesFilter({ data, styleHandler, replaceQuery }) {
   const router = useRouter();
   const existedStyle = router.query.style || "";
   const [show, setShow] = useState(true);
