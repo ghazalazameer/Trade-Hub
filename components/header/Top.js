@@ -1,11 +1,12 @@
 import styles from "./styles.module.scss";
-import { MdSecurity } from "react-icons/md";
-import { BsSuitHeart } from "react-icons/bs";
-import { RiAccountPinCircleLine, RiArrowDropDownFill } from "react-icons/ri";
+import { HiHeart } from "react-icons/hi";
+import { RiAccountPinCircleFill, RiArrowDropDownFill, RiCustomerServiceFill } from "react-icons/ri";
 import Link from "next/link";
 import { useState } from "react";
 import UserMenu from "./UserMenu";
 import { useSession } from "next-auth/react";
+import { FaHandsHelping } from "react-icons/fa";
+import { AiFillSafetyCertificate } from "react-icons/ai";
 
 export default function Top() {
   const { data: session } = useSession()
@@ -25,17 +26,19 @@ export default function Top() {
             <span>India / INR</span>
           </li>
           <li className={styles.li}>
-            <MdSecurity />
+          <AiFillSafetyCertificate />
             <span>Buyer Protection</span>
           </li>
           <li className={styles.li}>
+          <RiCustomerServiceFill />
             <span>Customer Service</span>
           </li>
           <li className={styles.li}>
+          <FaHandsHelping />
             <span>Help</span>
           </li>
          <li className={styles.li}>
-            <BsSuitHeart />
+            <HiHeart />
             <Link href="/profile/wishlist">
             <span>Wishlist</span>
             </Link>
@@ -55,11 +58,11 @@ export default function Top() {
           </li>
             ) : (
               <li>
-            <div className={styles.flex}>
-            <RiAccountPinCircleLine />
+             <div className={styles.flex}>
+                <RiAccountPinCircleFill />
                 <span>Account</span>
                 <RiArrowDropDownFill />
-            </div>
+              </div>
           </li>
             )
           }

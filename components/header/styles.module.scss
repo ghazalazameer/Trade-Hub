@@ -17,7 +17,7 @@
     &__container{
         max-width: 95%;
         margin: 0 auto;
-        padding: 5px;
+        padding: 10px 1rem;
         display: flex;
         align-items: center;
         justify-content: space-between;
@@ -30,13 +30,13 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 4px;
+            gap: 7px;
             color: #666;
             cursor: pointer;
             .flex{
                 display: flex;
                 align-items: center;
-                gap: 2px;
+                gap: 5px;
                 svg{
                     transform: scale(1.2);
                     margin-right: 3px;
@@ -54,7 +54,7 @@
                 fill: #ccc;
             }
             span{
-                font-size: 12px;
+                font-size: 13px;
             }
             &::after{
                 counter-reset: none;
@@ -90,6 +90,8 @@
         }
     }
 }
+
+// user menu (downdrop of 'account' from header options).....................
 .menu{
     width: 280px;
     min-height: 200%;
@@ -105,25 +107,37 @@
     padding: 1rem 0;
     h4{
         text-align: center;
+        color: $blue-color;
     }
-    .flex{
-        display: flex !important;
-        gap: 10px !important;
+    .flex {
+        display: flex;
+        gap: 10px;
         width: 100%;
         padding: 0 1rem;
-    }
-    ul{
-        li{
-            height: 30px;
-            a{
-                width: 100%;
-                padding-left: 1rem !important;
-            }
-            &:hover{
-                background: #eeeeeebe;
-            }
+      }
+    ul {
+        li {
+          height: 45px;
+          display: flex;
+          font-size: 14px;
+          align-items: center;
+          text-align: center;
+          margin: 0 20px;
+          border-bottom: 1px solid #f0f0f0;
+    
+          a {
+            width: 100%;
+          }
+    
+          &:hover {
+            background-color: #eeeeeebe;
+          }
+    
+          &:last-of-type {
+            border: none;
+          }
         }
-    }
+      }
     &__img{
         width: 100px !important;
         height: 100px !important;
