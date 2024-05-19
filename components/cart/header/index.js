@@ -8,7 +8,7 @@ export default function Header() {
       <div className={styles.header__container}>
         <div className={styles.header__left}>
           <Link href="/">
-            <img src="../../../logo2.png" />
+            <img src="../../../logo.png" />
           </Link>
         </div>
         <div className={styles.header__right}>
