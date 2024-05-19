@@ -38,4 +38,4 @@ router.post(async (req, res) => {
   }
 });
 
-export default router.handler;
+export default router.handler();
