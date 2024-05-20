@@ -1,17 +1,10 @@
 import styles from "./styles.module.scss";
-import Link from "next/link";
 
 export default function HeaderCartItem({ item }) {
   return (
-    <Link
-      onClick={(e) => e.stopPropagation()}
-      rel="noopener noreferrer"
-      target="_blank"
-      href={`/product/${item.slug}?style=${item.style}&size=${item.sizeIndex}`}
-      className={styles.cart__item}
-    >
+    <div className={styles.cart__item}>
       <div className={styles.cart__item_image}>
-        <img src={item.images[0].url} />
+        <img src={item.images[0].url} alt={item.name} />
         <p>{item.qty}</p>
       </div>
       <div className={styles.cart__item_info}>
@@ -24,6 +17,6 @@ export default function HeaderCartItem({ item }) {
       <div className={styles.cart__item_amount}>
         ${(item.qty * item.price).toFixed(2)}
       </div>
-    </Link>
+    </div>
   );
 }

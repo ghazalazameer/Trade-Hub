@@ -11,7 +11,7 @@ import {
     calculateSubPrice,
     calculateTotal,
     calculateTotalShipping,
-  } from "@/utils/productUltils";
+  } from "@/utils/productUtils";
 
 export default function Main({searchHandler}) {
     const router=useRouter();
