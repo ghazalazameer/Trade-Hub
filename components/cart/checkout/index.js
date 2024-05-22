@@ -20,7 +20,7 @@ export default function Checkout({
       </div>
       <div className={styles.cart__checkout_total}>
         <span>Total</span>
-        <span>INR {total}Rs.</span>
+        <span>Rs. {total}</span>
       </div>
       <div className={styles.submit}>
         <button

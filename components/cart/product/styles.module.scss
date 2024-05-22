@@ -1,49 +1,64 @@
 @import "../base";
+
 .product {
-  position: relative;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  padding: 1rem;
+  margin-bottom: 1rem; 
   display: flex;
-  flex-direction: column;
+  flex-direction: column; 
+  align-items: center;
   gap: 1rem;
+
   &__header {
     display: flex;
-    align-items: center;
+    // align-items: center;
     gap: 10px;
     font-size: 14px;
     color: #666;
     border-bottom: 1px solid #eee;
     padding-bottom: 1rem;
+    margin-bottom: 1rem; 
+
     img {
       width: 18px;
     }
   }
+
   &__image {
     display: grid;
     grid-template-columns: 30px 100px 1fr;
     gap: 10px;
+
     img {
       width: 100px;
       height: 140px;
       object-fit: cover;
     }
+
     h1 {
       font-size: 14px;
       font-weight: 600;
       color: #3a3e4a;
     }
+
     .grid {
       display: grid;
       grid-template-columns: 1fr 25px 25px;
+
       svg {
         width: 22px;
         height: 22px;
         cursor: pointer;
         fill: #666;
+
         &:hover {
           fill: $blue-color;
         }
       }
     }
   }
+
   &__style {
     display: flex;
     align-items: center;
@@ -54,12 +69,15 @@
     border-radius: 10px;
     font-size: 14px;
     cursor: pointer;
+
     span {
       font-weight: 600;
     }
+
     &:hover {
       background: #f5f5f5;
     }
+
     img {
       width: 30px;
       height: 30px;
@@ -67,27 +85,33 @@
       object-fit: cover;
     }
   }
+
   &__priceQty {
     display: flex;
     flex-direction: column;
     gap: 10px;
+
     @media (min-width: 500px) {
       flex-direction: row;
       justify-content: space-between;
     }
+
     &_price {
       display: flex;
       align-items: center;
       gap: 10px;
+
       .price {
         font-size: 17px;
         font-weight: 600;
       }
+
       .priceBefore {
         text-decoration: line-through;
         color: #cccccc;
         font-size: 14px;
       }
+
       .discount {
         background: #ffecea;
         color: #fa6338;
@@ -97,10 +121,12 @@
         font-weight: 600;
       }
     }
+
     &_qty {
       display: flex;
       align-items: center;
       gap: 10px;
+
       button {
         background: #f5f5f5;
         width: 30px;
@@ -110,20 +136,22 @@
         place-items: center;
         cursor: pointer;
       }
+
       span {
         font-size: 14px;
       }
     }
   }
+
   &__shipping {
     font-size: 12px;
     color: $blue-color;
   }
-}
 
-.notAvailable {
-  color: $redish-color;
-  font-size: 15px;
-  padding-left: 2rem;
-  z-index: 2;
+  .notAvailable {
+    color: $redish-color;
+    font-size: 15px;
+    padding-left: 2rem;
+    z-index: 2;
+  }
 }

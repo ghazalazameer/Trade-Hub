@@ -3,7 +3,8 @@ import styles from "./styles.module.scss";
 export default function PaymentMethods() {
   return (
     <div className={`${styles.card} ${styles.cart__method}`}>
-      <h2 className={styles.header}>Payment Methods</h2>
+      <h3 className={styles.header}>Payment Methods</h3>
+      <div className={styles.separator}></div>
       <div className={styles.images}>
         <img src="../../../images/payment/visa.webp" alt="" />
         <img src="../../../images/payment/mastercard.webp" alt="" />
