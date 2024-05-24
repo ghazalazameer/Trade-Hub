@@ -159,9 +159,9 @@ const Product = ({ product, selected, setSelected }) => {
             </p>
           )}
           <div className={styles.price__number}>
-            {product.price && <span>Rs.{product.price.toFixed(2)}</span>}
+            {product.price && <span>₹{product.price.toFixed(2)}</span>}
             {product.price !== product.priceBefore && !isSmall && (
-              <del>Rs.{product.priceBefore}</del>
+              <del>₹{product.priceBefore}</del>
             )}
           </div>
         </div>
@@ -181,7 +181,7 @@ const Product = ({ product, selected, setSelected }) => {
           </button>
         </div>
         <span className={styles.amount}>
-          Rs.{(product.price * product.qty).toFixed(2)}
+          ₹{(product.price * product.qty).toFixed(2)}
         </span>
         <div className={styles.action}>
           <div
