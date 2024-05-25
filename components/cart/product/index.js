@@ -102,7 +102,7 @@ const Product = ({ product, selected, setSelected }) => {
           {!isSmall && (
             <Link
               target="_blank"
-              href={`/product/${product.slug}?style=${product.style}&size=${product.sizeIndex}`}
+              href={`/product/${product.slug}?style=${active}`}
               className={styles.image}
             >
               <img src={product.images[0].url} />
@@ -143,7 +143,7 @@ const Product = ({ product, selected, setSelected }) => {
                 <span>Details :&nbsp;</span>
                 <Link
                   target="_blank"
-                  href={`/product/${product.slug}?style=${product.style}&size=${product.sizeIndex}`}
+                  href={`/product/${product.slug}?style=${active}`}
                 >
                   Click here <MdOutlineKeyboardArrowRight />
                 </Link>

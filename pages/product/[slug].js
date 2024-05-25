@@ -11,6 +11,8 @@ import MainSwiper from "@/components/productPage/mainSwiper";
 import { useState } from "react";
 import Infos from "@/components/productPage/infos";
 import Reviews from "@/components/productPage/reviews";
+import Link from "next/link";
+import BreadCrumb from "@/components/BreadCrumb";
 
 export default function Products({ product }) {
   const [activeImg, setActiveImg] = useState("");
@@ -28,10 +30,11 @@ export default function Products({ product }) {
       <div className={styles.product}>
         <div className={styles.product__container}>
           <div className={styles.path}>
-            Home/ {product.category?.name}/
-            {product.subCategories.map((sub, index) => (
-              <span key={index}>/{sub.name}</span>
-            ))}
+            <BreadCrumb
+              category={product.category?.name}
+              categoryLink={`/category/${product.category?.slug}`}
+              subCategories={product.subCategories}
+            />
           </div>
           <div className={styles.product__main}>
             <MainSwiper images={product.images} activeImg={activeImg} />
@@ -44,6 +47,7 @@ export default function Products({ product }) {
     </div>
   );
 }
+
 export async function getServerSideProps(context) {
   const { query } = context;
   const slug = query.slug;
@@ -76,37 +80,33 @@ export async function getServerSideProps(context) {
       return p.color;
     }),
     priceRange: subProduct.discount
-      ? `From ${(prices[0] - prices[0] / subProduct.discount).toFixed(2)} to ${(
-          prices[prices.length - 1] -
-          prices[prices.length - 1] / subProduct.discount
+      ? `From ${(prices[0] * (1 - subProduct.discount)).toFixed(2)} to ${(
+          prices[prices.length - 1] * (1 - subProduct.discount)
         ).toFixed(2)}$`
       : `From ${prices[0]} to ${prices[prices.length - 1]}$`,
-      price:
+    price:
       subProduct.discount > 0
-        ? (
-            subProduct.sizes[size].price -
-            subProduct.sizes[size].price / subProduct.discount
-          ).toFixed(2)
+        ? (subProduct.sizes[size].price * (1 - subProduct.discount)).toFixed(2)
         : subProduct.sizes[size].price,
-        priceBefore: subProduct.sizes[size].price,
-        quantity: subProduct.sizes[size].qty,
-        ratings: [
-          {
-            percentage: calculatePercentage("5"),
-          },
-          {
-            percentage: calculatePercentage("4"),
-          },
-          {
-            percentage: calculatePercentage("3"),
-          },
-          {
-            percentage: calculatePercentage("2"),
-          },
-          {
-            percentage: calculatePercentage("1"),
-          },
-        ],
+    priceBefore: subProduct.sizes[size].price,
+    quantity: subProduct.sizes[size].qty,
+    ratings: [
+      {
+        percentage: calculatePercentage("5"),
+      },
+      {
+        percentage: calculatePercentage("4"),
+      },
+      {
+        percentage: calculatePercentage("3"),
+      },
+      {
+        percentage: calculatePercentage("2"),
+      },
+      {
+        percentage: calculatePercentage("1"),
+      },
+    ],
     reviews: product.reviews.reverse(),
     allSizes: product.subProducts
       .map((p) => {

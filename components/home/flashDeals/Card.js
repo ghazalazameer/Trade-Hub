@@ -16,10 +16,10 @@ export default function FlashCard({product}) {
         </div>
         <div className={styles.card__price}>
         <span>
-          Rs. {(product.price - product.price / product.discount).toFixed(2)}
+          ₹ {(product.price - product.price / product.discount).toFixed(2)}
         </span>
         <span>
-          -Rs.
+          -₹
           {(
             product.price -
             (product.price - product.price / product.discount)

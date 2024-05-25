@@ -65,13 +65,13 @@ export default function Dashboard({ users, orders, products }) {
               <GiTakeMyMoney />
             </div>
             <div className={styles.card__infos}>
-              <h4>+{orders.reduce((a, val) => a + val.total, 0)}$</h4>
+              <h4>+{orders.reduce((a, val) => a + val.total, 0)}₹</h4>
               <h5>
                 -
                 {orders
                   .filter((o) => !o.isPaid)
                   .reduce((a, val) => a + val.total, 0)}
-                $ Unpaid yet.
+                ₹ Unpaid yet.
               </h5>
               <span>Total Earnings</span>
             </div>
@@ -97,7 +97,7 @@ export default function Dashboard({ users, orders, products }) {
                 {orders.map((order) => (
                   <tr key={order._id}>
                     <td>{order.user.name}</td>
-                    <td>{order.total} $</td>
+                    <td>{order.total} ₹</td>
                     <td>
                       {order.isPaid ? (
                         <img src="/images/verified.webp" alt="" />

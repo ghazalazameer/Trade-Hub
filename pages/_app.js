@@ -17,7 +17,7 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }) {
     <>
       <Head>
         <title>TradeHub - All in One</title>
-        <meta name="description" content="SwiftCart-CMS" />
+        <meta name="description" content="TradeHub" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <SessionProvider session={session}>

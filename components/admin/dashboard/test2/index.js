@@ -32,7 +32,7 @@ const Notifications = ({}) => {
                   <img src={n.image} alt="" />
                   <p>
                     <span>{n.user}</span> has created a new order, total of{" "}
-                    {n.total} $ .
+                    {n.total} ₹ .
                   </p>
                 </div>
               ) : (
