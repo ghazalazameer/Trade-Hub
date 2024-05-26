@@ -61,16 +61,16 @@ return (
                   <div className={styles.cart__priceComponent}>
                     <p>
                       <span>Subtotal :</span>
-                      <span>${calculateSubPrice(cart.cartItems)}</span>
+                      <span>₹{calculateSubPrice(cart.cartItems)}</span>
                     </p>
                     <p>
                       <span>Shipping :</span>
-                      <span>${calculateTotalShipping(cart.cartItems)}</span>
+                      <span>₹{calculateTotalShipping(cart.cartItems)}</span>
                     </p>
                   </div>
                   <div className={styles.cart__total}>
                     <span>Total :</span>
-                    <span>{calculateTotal(cart.cartItems)}$</span>
+                    <span>₹{calculateTotal(cart.cartItems)}</span>
                   </div>
                   <div className={styles.cart__seeAll}>
                     See all items in cart
