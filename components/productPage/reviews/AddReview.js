@@ -30,12 +30,12 @@ export default function AddReview({ product, setReviews }) {
     setLoading(true);
     let msgs = [];
     // Validate required fields.....................................
-    if (!size) {
-      msgs.push({
-        msg: "Please select a size !",
-        type: "error",
-      });
-    }
+    // if (!size) {
+    //   msgs.push({
+    //     msg: "Please select a size !",
+    //     type: "error",
+    //   });
+    // }
     if (!style) {
       msgs.push({
         msg: "Please select a style !",
