@@ -1,17 +1,15 @@
-import { useState } from "react";
+import * as React from "react";
+import { styled } from "@mui/material/styles";
+import { BiRightArrow } from "react-icons/bi";
 import MuiAccordion from "@mui/material/Accordion";
 import MuiAccordionSummary from "@mui/material/AccordionSummary";
 import MuiAccordionDetails from "@mui/material/AccordionDetails";
-import { styled } from "@mui/material/styles";
+import styles from "./styles.module.scss";
+import Share from "./share";
+import { FaCopy, FaShareAlt } from "react-icons/fa";
+import SimillarSwiper from "./SimillarSwiper";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { MdPlayArrow } from "react-icons/md";
-import { FaCopy, FaShareAlt } from "react-icons/fa";
-
-import styles from "./styles.module.scss";
-
-import Share from "./Share";
-import SimilarSwiper from "./SimilarSwiper";
 
 const Accordion = styled((props) => (
   <MuiAccordion disableGutters elevation={0} square {...props} />
@@ -28,7 +26,7 @@ const Accordion = styled((props) => (
 
 const AccordionSummary = styled((props) => (
   <MuiAccordionSummary
-    expandIcon={<MdPlayArrow sx={{ fontSize: "0.9rem" }} />}
+    expandIcon={<BiRightArrow sx={{ fontSize: "0.9rem" }} />}
     {...props}
   />
 ))(({ theme }) => ({
@@ -52,12 +50,12 @@ const AccordionDetails = styled(MuiAccordionDetails)(({ theme }) => ({
 
 export default function Accordian({ details, product }) {
   const url = window.location.href;
-  const [expanded, setExpanded] = useState("");
+  const [expanded, setExpanded] = React.useState("");
   const handleChange = (panel) => (event, newExpanded) => {
     setExpanded(newExpanded ? panel : false);
   };
   return (
-    <div className={styles.accordian}>
+    <div className={styles.infos__accordian}>
       <Accordion
         expanded={expanded === "panel1"}
         onChange={handleChange("panel1")}
@@ -71,27 +69,17 @@ export default function Accordian({ details, product }) {
           Details
         </AccordionSummary>
         <AccordionDetails>
-          <div className={styles.accordian_grid}>
+          <div className={styles.infos__accordian_grid}>
             <p>{details[0]}</p>
           </div>
         </AccordionDetails>
         <AccordionDetails className="scrollbar">
-          <table className={styles.specifications}>
-            <thead>
-              <tr>
-                <th>Specifications</th>
-                <th>Decription</th>
-              </tr>
-            </thead>
-            <tbody>
-              {details.slice(1, details.length).map((info, index) => (
-                <tr key={index}>
-                  <td>{info.name}</td>
-                  <td>{info.value}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+            {details.slice(1, details.length).map((info, index) => (
+                <div key={index} className={styles.infos__accordian_grid}>
+                    <span>{info.name}:</span>
+                    <span>{info.value}</span>
+                </div>
+            ))}
         </AccordionDetails>
       </Accordion>
       <Accordion
@@ -104,7 +92,7 @@ export default function Accordian({ details, product }) {
           aria-controls="panel1d-content"
           id="panel1d-header"
         >
-          Sizes & Fit
+          Size & Fit
         </AccordionSummary>
         <AccordionDetails>
           <table className={styles.sizes}>
@@ -137,6 +125,9 @@ export default function Accordian({ details, product }) {
               </tr>
             </tbody>
           </table>
+        </AccordionDetails>
+        <AccordionDetails>
+          <div className={styles.infos__accordian_grid}></div>
         </AccordionDetails>
       </Accordion>
       <Accordion
@@ -185,11 +176,10 @@ export default function Accordian({ details, product }) {
         >
           Similar products
         </AccordionSummary>
-
         <AccordionDetails className="scrollbar">
-          <SimilarSwiper product={product} />
+          <SimillarSwiper/>
         </AccordionDetails>
-      </Accordion>
+        </Accordion>
     </div>
   );
 }

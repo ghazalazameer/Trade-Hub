@@ -1,151 +1,78 @@
-/* eslint-disable @next/next/no-img-element */
-import { ClickAwayListener } from "@mui/material";
+import styles from "./styles.module.scss";
+import { IoArrowDown } from "react-icons/io5";
 import { useState } from "react";
-import { IoArrowDown, IoArrowUp } from "react-icons/io5";
-
-import styled from "./styles.module.scss";
-
-const Select = ({
-  size,
-  style,
-  fit,
-  text,
-  data,
-  sizeChangeHandler,
-  styleChangeHandler,
-  fitChangeHandler,
-}) => {
+export default function Select({ property, text, data, handleChange }) {
   const [visible, setVisible] = useState(false);
-
-  const handleClickAway = () => {
-    if (visible) {
-      setVisible(false);
-    }
-  };
-
-  const chooseAllOptionHandler = () => {
-    if (text == "Size") {
-      sizeChangeHandler("all");
-      setVisible(false);
-    } else if (text == "Style") {
-      styleChangeHandler("all");
-      setVisible(false);
-    } else if (text == "How does it fit") {
-      fitChangeHandler("all");
-      setVisible(false);
-    }
-  };
-
   return (
-    <div className={styled.select}>
-      <span className={styled.select__title}>{text} :</span>
-      <div className={styled.select__header}>
-        <span
-          className={`flex ${styled.select__header_wrap}`}
-          onClick={() => setVisible((prev) => !prev)}
+    <div className={styles.select}>
+      {text}:
+      <div
+        className={styles.select__header}
+        onMouseOver={() => setVisible(true)}
+        onMouseLeave={() => setVisible(false)}
+        style={{
+          background: `${
+            text == "Style" && property.color && `${property.color}`
+          }`,
+        }}
+      >
+         <span
+          className={`${styles.flex} ${styles.select__header_wrap}`}
+          style={{
+            padding: "0 5px",
+          }}
         >
-          <span>
-            {text === "Size" ? size || `Select ${text}` : ""}
-
-            {text === "Style" && style.colorImg && (
-              <img src={style.colorImg} alt="" />
-            )}
-            {text === "Style" && !style.colorImg && style.color && (
-              <span
-                style={{
-                  background: `${style.color}`,
-                  width: "30px",
-                  height: "30px",
-                  borderRadius: "50%",
-                }}
-              ></span>
-            )}
-            {text === "Style" && style === "all" && "All"}
-            {text === "Style" && !style && "Select Style"}
-
-            {text == "How does it fit" ? fit || "Select" : ""}
-          </span>
-
-          {visible ? <IoArrowUp /> : <IoArrowDown />}
+          {text == "Size" ? (
+            property || `Select ${text}`
+          ) : text == "Style" && property.image ? (
+            <img src={property.image} alt="" />
+          ) : text == "How does it fit" && property ? (
+            property
+          ) : !property && text == "How does it fit" ? (
+            "How Does it fit"
+          ) : (
+            "Select Style"
+          )}
+          <IoArrowDown />
         </span>
         {visible && (
-          <ClickAwayListener onClickAway={handleClickAway}>
-            <ul className={styled.select__header_menu}>
-              {text == "Size" && size !== "all" && (
-                <li onClick={chooseAllOptionHandler}>
-                  <span>All</span>
-                </li>
-              )}
-              {text == "Style" && style !== "all" && (
-                <li onClick={chooseAllOptionHandler}>
-                  <span>All</span>
-                </li>
-              )}
-              {text == "How does it fit" && fit !== "all" && (
-                <li onClick={chooseAllOptionHandler}>
-                  <span>All</span>
-                </li>
-              )}
-              {data.map((item, index) => {
-                if (text == "Size") {
-                  return (
-                    <li
-                      key={index}
-                      onClick={() => {
-                        sizeChangeHandler(item);
-                        setVisible(false);
-                      }}
-                    >
-                      <span>{`Size ${item}`}</span>
-                    </li>
-                  );
-                }
-                if (text == "Style") {
-                  return (
-                    <li
-                      key={index}
-                      onClick={() => {
-                        styleChangeHandler(item);
-                        setVisible(false);
-                      }}
-                    >
-                      <span>
-                        {item.colorImg ? (
-                          <img src={item.colorImg} alt="" />
-                        ) : (
-                          <span
-                            style={{
-                              background: `${item.color}`,
-                              width: "30px",
-                              height: "30px",
-                              borderRadius: "50%",
-                            }}
-                          ></span>
-                        )}
-                      </span>
-                    </li>
-                  );
-                }
-                if (text == "How does it fit") {
-                  return (
-                    <li
-                      key={index}
-                      onClick={() => {
-                        fitChangeHandler(item);
-                        setVisible(false);
-                      }}
-                    >
-                      <span>{item}</span>
-                    </li>
-                  );
-                }
-              })}
-            </ul>
-          </ClickAwayListener>
+          <ul
+            className={styles.select__header_menu}
+            onMouseOver={() => setVisible(true)}
+            onMouseLeave={() => setVisible(false)}
+          >
+            {data.map((item, i) => {
+              if (text == "Size") {
+                return (
+                  <li key={i} onClick={() => handleChange(item.size)}>
+                    <span>{item.size}</span>
+                  </li>
+                );
+              }
+              if (text == "Style") {
+                return (
+                  <li
+                    key={i}
+                    onClick={() => handleChange(item)}
+                    style={{ backgroundColor: `${item.color}` }}
+                  >
+                    <span>
+                      <img src={item.image} alt="" />
+                    </span>
+                  </li>
+                );
+              }
+              if (text == "How does it fit") {
+                return (
+                  <li key={i} onClick={() => handleChange(item)}>
+                    <span>{item}</span>
+                  </li>
+                );
+              }
+            })}
+          </ul>
         )}
       </div>
     </div>
   );
-};
-
-export default Select;
+}

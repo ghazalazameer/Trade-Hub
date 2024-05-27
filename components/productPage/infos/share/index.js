@@ -23,56 +23,36 @@ import {
   WhatsappIcon,
 } from "react-share";
 
-import { useMediaQuery } from "react-responsive";
-
 export default function Share() {
-  const isSmall = useMediaQuery({ query: "(max-width: 518px)" });
-  const isSuperSmall = useMediaQuery({ query: "(max-width:481px)" });
-  const isExtraSuperSmall = useMediaQuery({ query: "(max-width:443px)" });
-
-  let size = 35;
-
-  if (isSmall) {
-    size = 30;
-  }
-
-  if (isSuperSmall) {
-    size = 25;
-  }
-
   return (
     <div className={styles.share}>
       <FacebookShareButton url={window?.location.href}>
-        <FacebookIcon size={size} />
+        <FacebookIcon size={38} />
       </FacebookShareButton>
       <FacebookMessengerShareButton url={window?.location.href}>
-        <FacebookMessengerIcon size={size} />
+        <FacebookMessengerIcon size={38} />
       </FacebookMessengerShareButton>
       <TwitterShareButton url={window?.location.href}>
-        <TwitterIcon size={size} />
+        <TwitterIcon size={38} />
       </TwitterShareButton>
       <LinkedinShareButton url={window?.location.href}>
-        <LinkedinIcon size={size} />
+        <LinkedinIcon size={38} />
       </LinkedinShareButton>
       <RedditShareButton url={window?.location.href}>
-        <RedditIcon size={size} />
+        <RedditIcon size={38} />
       </RedditShareButton>
       <TelegramShareButton url={window?.location.href}>
-        <TelegramIcon size={size} />
+        <TelegramIcon size={38} />
       </TelegramShareButton>
-      {!isExtraSuperSmall && (
-        <>
-          <WhatsappShareButton url={window?.location.href}>
-            <WhatsappIcon size={size} />
-          </WhatsappShareButton>
-          <PinterestShareButton url={window?.location.href}>
-            <PinterestIcon size={size} />
-          </PinterestShareButton>
-          <EmailShareButton url={window?.location.href}>
-            <EmailIcon size={size} />
-          </EmailShareButton>
-        </>
-      )}
+      <WhatsappShareButton url={window?.location.href}>
+        <WhatsappIcon size={38} />
+      </WhatsappShareButton>
+      <PinterestShareButton url={window?.location.href}>
+        <PinterestIcon size={38} />
+      </PinterestShareButton>
+      <EmailShareButton url={window?.location.href}>
+        <EmailIcon size={38} />
+      </EmailShareButton>
     </div>
   );
 }

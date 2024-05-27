@@ -31,7 +31,6 @@
     "formik": "^2.4.5",
     "googleapis": "^134.0.0",
     "jsonwebtoken": "^9.0.2",
-    "lightbox.js-react": "^1.0.8",
     "mongodb": "^6.5.0",
     "mongoose": "^8.2.3",
     "next": "^14.1.4",
