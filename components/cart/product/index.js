@@ -135,7 +135,7 @@ const Product = ({ product, selected, setSelected }) => {
             {!isSuperSmall && (
               <p>
                 <span>Ship fee :&nbsp;</span>
-                {product.shipping ? `$${product.shipping}` : "Free shipping"}
+                {product.shipping ? `₹${product.shipping}` : "Free shipping"}
               </p>
             )}
             {!isSuperSmall && (
