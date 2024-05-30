@@ -17,56 +17,38 @@ import CartHeader from "@/components/cart/cartHeader";
 import Checkout from "@/components/cart/checkout";
 import PaymentMethods from "@/components/cart/paymentMethods";
 import ProductsSwiper from "@/components/productsSwiper";
+import {
+  calculateSubPrice,
+  calculateTotal,
+  calculateTotalShipping,
+} from "@/utils/productUtils";
 
 export default function Cart() {
-  //---
   const Router = useRouter();
   const { data: session } = useSession();
   const { cart } = useSelector((state) => ({ ...state }));
   const dispatch = useDispatch();
   const [selected, setSelected] = useState([]);
-  //-------
 
-  //----
-  // useEffect(() => {
-  //   const update = async () => {
-  //     const { data } = await axios.post("/api/user/saveCart", {
-  //       products: cart.cartItems,
-  //     });
-  //     dispatch(updateCart(data));
-  //   };
-  //   if (cart.cartItems.length > 0) {
-  //     update();
-  //   }
-  // }, [cart, dispatch]);
-  //----
-
-  // ------
   const [shippingFee, setShippingFee] = useState(0);
   const [subtotal, setSubtotal] = useState(0);
   const [total, setTotal] = useState(0);
-  //----
+
   useEffect(() => {
-    setShippingFee(
-      selected.reduce((a, c) => a + Number(c.shipping), 0).toFixed(2)
-    );
-    setSubtotal(selected.reduce((a, c) => a + c.price * c.qty, 0).toFixed(2));
-    setTotal(
-      (
-        selected.reduce((a, c) => a + c.price * c.qty, 0) + Number(shippingFee)
-      ).toFixed(2)
-    );
+    setShippingFee(calculateTotalShipping(selected));
+    setSubtotal(calculateSubPrice(selected));
+    setTotal(calculateTotal(selected, shippingFee));
   }, [selected, shippingFee]);
 
   const saveCartToDbHandler = async () => {
     if (session) {
-      const res = saveCart(selected, session.user.id);
+      const res = await saveCart(selected, session.user.id);
       Router.push("/checkout");
     } else {
       signIn();
     }
   };
-  // ------
+
   return (
     <>
       <Header />

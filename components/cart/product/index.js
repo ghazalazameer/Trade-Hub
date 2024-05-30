@@ -117,7 +117,7 @@ const Product = ({ product, selected, setSelected }) => {
               </p>
             )}
             <p>
-              <span>Color :&nbsp;</span>
+              <span>Style :&nbsp;</span>
               {product.color.image ? (
                 <img src={product.color.image} alt="" />
               ) : (
