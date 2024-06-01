@@ -5,7 +5,7 @@ import { RxCrossCircled } from "react-icons/rx";
 import { MdRepeatOn } from "react-icons/md";
 import { useField } from "formik";
 
-import styled from "./styles.module.scss";
+import styles from "./styles.module.scss";
 import { FaRegEye, FaRegEyeSlash, FaUserTie } from "react-icons/fa";
 import { useState } from "react";
 
@@ -20,18 +20,18 @@ const LoginInput = ({ icon, ...props }) => {
   return (
     <>
       {meta.error && meta.touched ? (
-        <p className={styled.errorMessage}>
+        <p className={styles.errorMessage}>
           <RxCrossCircled />
           {meta.error}
         </p>
       ) : (
-        <label htmlFor={props.id} className={styled.label}>
+        <label htmlFor={props.id} className={styles.label}>
           {props.label}
         </label>
       )}
       <div
-        className={`${styled.input} ${
-          meta.touched && meta.error ? styled.error : ""
+        className={`${styles.input} ${
+          meta.touched && meta.error ? styles.error : ""
         }`}
       >
         {icon === "user" ? (
@@ -60,7 +60,7 @@ const LoginInput = ({ icon, ...props }) => {
           }
         />
         {icon === "password" || icon === "repeat" ? (
-          <div className={styled.showHide} onClick={showHidePasswordHandler}>
+          <div className={styles.showHide} onClick={showHidePasswordHandler}>
             {isPassword ? <FaRegEye /> : <FaRegEyeSlash />}
           </div>
         ) : (
