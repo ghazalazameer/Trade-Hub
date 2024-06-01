@@ -6,6 +6,7 @@ import ShippingInput from "@/components/inputs/shippingInput";
 import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
 import { countries } from "@/data/countries";
 import SingularSelect from "@/components/selects/SingularSelect";
+import Popup from "@/components/Popup";
 import {
   deleteAddress,
   saveAddress,
@@ -17,8 +18,8 @@ import { GiPhone } from "react-icons/gi";
 import { FaMapMarkerAlt } from "react-icons/fa";
 import { IoMdArrowDropupCircle } from "react-icons/io";
 import { AiOutlinePlus } from "react-icons/ai";
-import { IoIosRemoveCircleOutline } from "react-icons/io";
 import { FaMapMarkedAlt } from "react-icons/fa";
+import { FcFullTrash } from "react-icons/fc";
 
 const initialValues = {
   firstName: "",
@@ -106,15 +107,25 @@ export default function Shipping({ user, addresses, setAddresses, profile }) {
   };
 
   // change active address handler
-  const changeActiveHandler = async (id) => {
-    const res = await changeActiveAddress(id);
-    setAddresses(res.addresses);
+  const changeActiveHandler = async (address_id) => {
+    const res = await changeActiveAddress(user._id || user.user.id, address_id);
+    setAddresses(res);
   };
 
   // delete address handler
-  const deleteHandler = async (id) => {
-    const res = await deleteAddress(id);
-    setAddresses(res.addresses);
+  const deleteHandler = async (address_id) => {
+    Popup(
+      "Are you sure?",
+      "You won't be able to revert this!",
+      "warning",
+      "Yes, delete it!",
+      async () => {
+        const res = await deleteAddress(user._id || user.user.id, address_id);
+        setAddresses(res);
+      },
+      "Done!",
+      "Address has been deleted."
+    );
   };
 
   // ----------------------------------------
@@ -132,8 +143,9 @@ export default function Shipping({ user, addresses, setAddresses, profile }) {
             <div
               className={styles.address__delete}
               onClick={() => deleteHandler(address._id)}
+              style={{ cursor: 'pointer' }}
             >
-              <IoIosRemoveCircleOutline />
+              <FcFullTrash />
             </div>
 
             <div
