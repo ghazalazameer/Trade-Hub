@@ -1,6 +1,5 @@
-import Countdown from '@/components/countdown';
+import Countdown from '@/components/Countdown';
 import styles from './styles.module.scss';
-import {MdFlashOn} from 'react-icons/md';
 import FlashCard from './Card';
 
 import { useRef, useState } from 'react';
@@ -18,11 +17,13 @@ import { flashDealsArray } from '@/data/home';
 export default function FlashDeals() {
   return (
     <div className={styles.flashDeals}>
- <div className={styles.flashDeals__header}>
-        <h1>FLASH SALE <MdFlashOn /></h1>
-        <Countdown date={new Date(2024,3,9)}/>
-        
-    </div>
+  <div className={styles.flashDeals__title}>
+        <Countdown date={new Date(2023, 7, 25)} />
+        <h3>
+          <span>FLASH SALE</span>
+          <img src="/images/limited.png" alt="" />
+        </h3>
+      </div>
     <Swiper
         slidesPerView={5}
         spaceBetween={250}

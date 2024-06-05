@@ -294,14 +294,6 @@ export const userSwiperArray = [
 export const flashDealsArray = [
   {
     image:
-      "https://img.ltwebstatic.com/images3_pi/2022/09/15/1663220709c947ca4ad9aefd9c1f4baf5915653468_thumbnail_600x.webp",
-    price: "91",
-    discount: "11",
-    link: "",
-    sold: "30",
-  },
-  {
-    image:
       "https://img.ltwebstatic.com/images3_pi/2022/09/20/1663668243e6d8f250648c2f34988320c046cba68f_thumbnail_405x552.webp",
     price: "73",
     discount: "25",
@@ -315,14 +307,6 @@ export const flashDealsArray = [
     discount: "36",
     link: "",
     sold: "12",
-  },
-  {
-    image:
-      "https://img.ltwebstatic.com/images3_pi/2022/05/13/165244123600952e503ccab89dd363c9b71f9094f8_thumbnail_405x552.webp",
-    price: "1687",
-    discount: "20",
-    link: "",
-    sold: "96",
   },
   {
     image:
