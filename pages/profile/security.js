@@ -21,7 +21,7 @@ export default function Security({ user, tab }) {
   const validate = Yup.object({
     current_password: Yup.string()
       .required(
-        "Enter a combination of at least six numbers,letters and punctuation marks(such as ! and &)."
+        "Enter a combination of at least six numbers, letters and punctuation marks(such as ! and &)."
       )
       .min(6, "Password must be atleast 6 characters.")
       .max(36, "Password can't be more than 36 characters"),

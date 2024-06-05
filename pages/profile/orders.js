@@ -3,11 +3,9 @@ import Head from "next/head";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import Layout from "../../components/profile/layout";
-import { ordersLinks } from "../../data/profile";
 import Order from "../../models/Order";
 import styles from "../../styles/profile.module.scss";
 import { FiExternalLink } from "react-icons/fi";
-import slugify from "slugify";
 
 // Orders component...............................................
 export default function Orders({ user, tab, orders }) {
@@ -22,27 +20,6 @@ export default function Orders({ user, tab, orders }) {
           <h1>MY ORDERS</h1>
         </div>
         <nav>
-          <ul>
-            {ordersLinks.map((link, i) => (
-              <li
-                key={i}
-                className={
-                  slugify(link.name, { lower: true }) ==
-                  router.query.q.split("__")[0]
-                    ? styles.active
-                    : ""
-                }
-              >
-                <Link
-                  href={`/profile/orders?tab=${tab}&q=${slugify(link.name, {
-                    lower: true,
-                  })}__${link.filter}`}
-                >
-                  {link.name}
-                </Link>
-              </li>
-            ))}
-          </ul>
         </nav>
         <table>
           <thead>
@@ -72,7 +49,7 @@ export default function Orders({ user, tab, orders }) {
                             ? "Credit Card"
                             : "COD"}
                     </td>
-                    <td>{order.total}$</td>
+                    <td>₹{order.total}</td>
                     <td className={styles.orders__paid}>
                         {order.isPaid ? (
                             <img src="../../../images/verified.png" alt="" />

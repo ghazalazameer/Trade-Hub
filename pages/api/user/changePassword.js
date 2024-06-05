@@ -29,7 +29,7 @@ router.put(async (req, res) => {
       password: crypted_password,
     });
     db.disconnectDb();
-    res.json({ message: "Password has been changes successfully." });
+    res.json({ message: "Password has been changed successfully :)" });
   } catch (error) {
     return res.status(500).json({ message: error.message });
   }

@@ -164,7 +164,7 @@ export default function Orders({
                         {(
                           orderData.totalBeforeDiscount - orderData.total
                         ).toFixed(2)}
-                        $
+                        ₹
                       </span>
                     </div>
                     <div className={styles.order__products_total_sub}>

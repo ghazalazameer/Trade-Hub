@@ -1,17 +1,18 @@
 import { useState } from "react";
-import styles from "./styles.module.scss";
-import { signOut } from "next-auth/react";
 import Link from "next/link";
-import { HiMinusSm, HiPlusSm } from "react-icons/hi";
 import slugify from "slugify";
 import { useRouter } from "next/router";
 
-// Item component.......................................
-export default function Item({ item, visible, index }) {
+import styles from "./styles.module.scss";
+import { signOut } from "next-auth/react";
+import { HiMinusSm, HiPlusSm } from "react-icons/hi";
+
+export default function SidebarItem({ item, visible, index }) {
   const [show, setShow] = useState(visible);
   const router = useRouter();
+
   return (
-    <li>
+    <li className={styles.sidebar__item}>
       {item.heading == "Sign out" ? (
         <b onClick={() => signOut()}>Sign out</b>
       ) : (
@@ -19,6 +20,7 @@ export default function Item({ item, visible, index }) {
           {item.heading} {show ? <HiMinusSm /> : <HiPlusSm />}
         </b>
       )}
+
       {show && (
         <ul>
           {item.links.map((link, i) => (
@@ -32,12 +34,21 @@ export default function Item({ item, visible, index }) {
                       : ""
                   }
                 >
-                  <Link legacyBehavior
+                  <Link
                     href={`${link.link}?tab=${index}&q=${slugify(link.name, {
                       lower: true,
-                    })}__${link.filter}`}
+                    })}${link.filter ? `__${link.filter}` : ""}`}
                   >
-                    <a>{link.name}</a>
+                    <input
+                      type="radio"
+                      name="order"
+                      id={link.name}
+                      checked={
+                        (router.query.q?.split("__")[0] || "") ==
+                        slugify(link.name, { lower: true })
+                      }
+                    />
+                    <label htmlFor={link.name}>{link.name}</label>
                   </Link>
                 </li>
               ) : (
@@ -49,12 +60,21 @@ export default function Item({ item, visible, index }) {
                       : ""
                   }
                 >
-                  <Link legacyBehavior
+                  <Link
                     href={`${link.link}?tab=${index}&q=${slugify(link.name, {
                       lower: true,
                     })}`}
                   >
-                    <a>{link.name}</a>
+                    <input
+                      type="radio"
+                      name="order"
+                      id={link.name}
+                      checked={
+                        (router.query.q || "") ==
+                        slugify(link.name, { lower: true })
+                      }
+                    />
+                    <label htmlFor={link.name}>{link.name}</label>
                   </Link>
                 </li>
               )}
