@@ -349,7 +349,7 @@ export const women_dresses = [
   },
   {
     image:
-      "https://img.ltwebstatic.com/images3_pi/2022/04/25/16508565378f388bf7e888c2bc94273e9953d22100_thumbnail_600x.webp",
+      "https://assets0.mirraw.com/images/11486500/G103-Light_Pink__(1)_long_webp.webp?1696931148",
     price: "",
   },
   {
@@ -376,53 +376,37 @@ export const women_dresses = [
 export const women_shoes = [
   {
     image:
-      "https://img.ltwebstatic.com/images3_pi/2021/04/24/16192428449d0a2f9df3090b84cded584abe64c71e_thumbnail_600x.webp",
+      "https://5.imimg.com/data5/HR/YP/YD/SELLER-90058063/men-stylish-shoes.jpg",
   },
   {
     image:
-      "https://img.ltwebstatic.com/images3_pi/2022/06/14/165517428253e93bd6a795d9a97c21810ef1beb61c_thumbnail_600x.webp",
+      "https://assets.myntassets.com/w_412,q_60,dpr_2,fl_progressive/assets/images/22041136/2023/2/18/6c689ecb-6ec9-45f0-8135-5c3756818fd61676737340689ShoetopiaGirlsWhiteColourblockedSneakers1.jpg",
   },
   {
     image:
-      "https://img.ltwebstatic.com/images3_pi/2021/07/28/1627454227e78cf5c9d505d6c45a1c11e6c9b83625_thumbnail_600x.webp",
+      "https://i.pinimg.com/originals/7a/44/c3/7a44c3b3477746f1d7866f840e37dbbd.jpg",
   },
   {
     image:
-      "https://img.ltwebstatic.com/images3_pi/2022/05/13/1652449751b1c4055651a96b57ae161885def48c15_thumbnail_600x.webp",
-  },
-  {
-    image:
-      "https://img.ltwebstatic.com/images3_pi/2021/08/13/1628869751ad4c4dbe554b72f65af9d5c532528f6c_thumbnail_600x.webp",
-  },
-  {
-    image:
-      "https://img.ltwebstatic.com/images3_pi/2022/04/27/1651047458260c8e9c705b77227c9acdba9104c367_thumbnail_600x.webp",
+      "https://rukminim2.flixcart.com/image/850/1000/xif0q/shoe/c/9/m/3-sn-6002-pink-36-shoenstring-pink-original-imagh8jchzgvhvzz.jpeg?q=90&crop=false",
   },
 ];
 export const women_accessories = [
   {
     image:
-      "https://img.ltwebstatic.com/images3_pi/2022/05/12/1652333770b01690f4b990751e070cc10e4682b39d_thumbnail_600x.webp",
+      "https://media.istockphoto.com/id/1134003334/photo/young-woman-walking-on-street.jpg?s=612x612&w=0&k=20&c=5kRJCmzZl3CS1q7cBJrY6pBO1o_FRJnVV66C4GsztDU=",
   },
   {
     image:
-      "https://img.ltwebstatic.com/images3_pi/2021/10/18/1634549753f940286e6a06890c2a30302bbdbbf665_thumbnail_600x.webp",
+      "https://img.kwcdn.com/product/Fancyalgo/VirtualModelMatting/2b569e88a2f6aabf5dd6e103aecef8ad.jpg?imageMogr2/auto-orient%7CimageView2/2/w/1300/q/80/format/webp",
   },
   {
     image:
-      "https://img.ltwebstatic.com/images3_pi/2022/03/15/1647310895dcbf38181ac1254338a636f64c94384b_thumbnail_600x.webp",
+      "https://i.pinimg.com/originals/d9/76/48/d97648c0243e753fe1bb7912443ab76b.jpg",
   },
   {
     image:
-      "https://img.ltwebstatic.com/images3_pi/2022/05/13/1652449751b1c4055651a96b57ae161885def48c15_thumbnail_600x.webp",
-  },
-  {
-    image:
-      "https://img.ltwebstatic.com/images3_pi/2022/06/07/1654567858a331ceb5ce709ed8e53bc50b390d19f9_thumbnail_600x.webp",
-  },
-  {
-    image:
-      "https://img.ltwebstatic.com/images3_pi/2022/06/20/16557062656c0432e06a65323afab13e64550c45d6_thumbnail_600x.webp",
+      "https://static-01.daraz.com.bd/p/975c66d23a34a51cfacab19d84ec7f20.jpg",
   },
 ];
 
