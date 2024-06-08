@@ -376,7 +376,7 @@ export const women_dresses = [
 export const women_shoes = [
   {
     image:
-      "https://5.imimg.com/data5/HR/YP/YD/SELLER-90058063/men-stylish-shoes.jpg",
+      "https://rukminim2.flixcart.com/image/850/1000/xif0q/shoe/c/9/m/3-sn-6002-pink-36-shoenstring-pink-original-imagh8jchzgvhvzz.jpeg?q=90&crop=false",
   },
   {
     image:
@@ -384,11 +384,11 @@ export const women_shoes = [
   },
   {
     image:
-      "https://i.pinimg.com/originals/7a/44/c3/7a44c3b3477746f1d7866f840e37dbbd.jpg",
+      "https://5.imimg.com/data5/HR/YP/YD/SELLER-90058063/men-stylish-shoes.jpg",
   },
   {
     image:
-      "https://rukminim2.flixcart.com/image/850/1000/xif0q/shoe/c/9/m/3-sn-6002-pink-36-shoenstring-pink-original-imagh8jchzgvhvzz.jpeg?q=90&crop=false",
+      "https://i.pinimg.com/originals/7a/44/c3/7a44c3b3477746f1d7866f840e37dbbd.jpg",
   },
 ];
 export const women_accessories = [
